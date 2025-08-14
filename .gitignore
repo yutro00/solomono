@@ -1,2 +1,7 @@
-/nbproject/private/
 
+.git
+node_modules/
+
+nbproject/
+temp/
+*.zip
