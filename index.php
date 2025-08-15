@@ -5,11 +5,19 @@
  * точка входа на сайт 
  */
 
+//use app\controllers\IndexController;
 
-//подключаем маршруты
+//выводим ошибки
+ini_set('display_startup_errors', 1); 
+ini_set('display_errors', 1); error_reporting(E_ALL);
+
+//подключаем маршруты и данные
 require_once 'routes.php';
+require_once 'constants.php';
 
 $request_uri = $_SERVER['REQUEST_URI'];
+$host = $_SERVER['HTTP_HOST'];
+
 
 // определяем маршрут
 if (array_key_exists($request_uri, $routes)) {
@@ -19,12 +27,24 @@ if (array_key_exists($request_uri, $routes)) {
 
     // Подключаем нужный контроллер
     $class = __DIR__ . "/app/controllers/" . $controllerName . ".php";
-    require_once $class;
+    $res = require_once $class;
 
     // вызываем нужный метод
-    $controller = new $controllerName();
+    try {
+        $controller = new $controllerName();
+    } catch (Exception $exc) {
+        echo $exc->getTraceAsString();
+    }
     $controller->$actionName();
-
+    
+//  $nm = __NAMESPACE__;
+//  if ($nm === '') {
+//    echo 'empty root NAMESPACE';
+//  } else {
+//    echo $nm;
+//  }
+  
+  
 } else {
     // Обработка 404 ошибки
 //    http_response_code(404);

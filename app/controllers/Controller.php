@@ -5,11 +5,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
  */
 
+
+
 /**
  * Description of Controller
  *
  * @author yuriy
  */
 class Controller {
-    //put your code here
+    public $str = 'It\'s string of class Controller!';
 }
