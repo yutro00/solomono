@@ -15,6 +15,7 @@
 
 $resPage = require '/var/www/html/solomono/app/http/Page.php';
 
+//use app\http\Page;
 
 /**
  * Контроллер индексной страницы сайта
@@ -31,14 +32,25 @@ class IndexController
                 . '<html lang="en">' . "\n";
         
 //        $roles = Page::get_user_roles();
+        $page = new Page('guest');
         
-        $header = $this->get_header();
+//        $header = $this->get_header();  НЕ используется!!!
+        $header = $page->getHead();
+        
         $res .= $header;
         
         $title = '<h3 class="center green">It is solomono test project home page!</h3>';
+$roles = Page::get_user_roles();
+        $page = new Page();
+
+        $role = $page->getUserRole();
+$title .= 'Current user role: '  . $role;
+$roles = Page::get_user_roles();
+$title .= '<br> Roles count = ' . count($roles) . '<br>';
+
         $content_param = [];
         $content_param[] = $title;
-        $content_param[] = $this->get_js_str();
+        $content_param[] = $this->get_js_link();
         $content = $this->get_content($content_param);
         $body = $this->get_body($content);
         
@@ -49,23 +61,33 @@ class IndexController
     }
     
     
+    
+    
     public function getStyle()
     {
         $res = include '/var/www/html/solomono/app/views/css/style.css';
         echo $res;
     }
     
+    
+    public function getJsHeader($script) 
+    {
+//        if ($script <> '') {
+//            $script_link = "<script src=$script_link\"$script\"></script>";
+//        } else {
+//            $script_link = '';
+//        }
+//        return $script_link;
+    }
+
+
+
+
     public function get_header()
     {
         $res = '';
         
-        $script = '';       //загрузка js в хедере
-        if ($script <> '') {
-            $script_link = "<script src=\"$script\"></script>";
-        } else {
-            $script_link = '';
-        }
-    
+        $script_link = $this->get_js_link('test.js');
             
     $res .= '<head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8 X-Content-Type-Options=nosniff">
@@ -102,16 +124,24 @@ class IndexController
     {
         $res = '<body>';
         $res .= $str;
-        $script = $this->get_js_str();
+        $script = $this->get_js_link();
         $res .= $script;
         $res .= '</body>';
         return $res;
     }
     
     
-    public function get_js_str() 
+    public function get_js_link($filename = '') 
     {
-        $res = '<script src="#"></script>';
+        $res;
+        $link;
+        $path = '/app/views/js';
+        if ($filename <> '') {
+            $link = $path . "/$filename";
+            $res = "<script src=\"$link\"></script>";
+        } else {
+            $res = '';
+        }
         return $res;
     }
     

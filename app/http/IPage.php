@@ -21,6 +21,10 @@ interface IPage
     
     public function setHead($obj);
     
+    public function getBody($obj);
+    
+    public function setBody($obj);
+    
     public function getFooter();
     
     public function setFooter($obj);

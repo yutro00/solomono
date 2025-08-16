@@ -1,60 +1,79 @@
 <?php
 
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
+ * Project Solomono test
+ * Объект формирования HTML страниц
  */
 
 //namespace app\http;
-$res = require '/var/www/html/solomono/app/http/APage.php'; 
+//
+//use app\http\APage;
+
+$res = require '/var/www/html/solomono/app/http/APage.php';
 $res1 = include '/var/www/html/solomono/app/http/IPage.php'; 
+$res2 = require '/var/www/html/solomono/app/http/PageHead.php';
 
 /**
  * Формирует данные для представления http страницы
  *
  * @author yuriy
  */
-class Page //extends АPage implements IPage
-{
+class Page extends APage implements IPage
+{   
+    /**
+     * конфигурация страницы по умолчанию
+     * @var Array
+     */
+    private $confDefault = [
+        'user_role' => 'guest',
+        'page_type' => 'index',
+        'header1' => true,
+        'header2' => true,
+        'header3' => true,
+        'basket' => '',
+        'category_count' => '8',    //число пунктов в строке категорий, не более
+    ];
     
-    static public $user_roles = [
-        'guest', 
-        'client',
-        'operator',
-        'admin',
-        'sysadmin'
-    ]; 
-    private $user_role = 'guest';
-    private $head;
-    private $footer;
-    private $body;
-    
+     
+    private $userRole = 'guest';
+
+    private $head;                  //html строка с заголовком документа
+    private $footer;                //html строка с подвалом документа
+    private $body;                  //html контент
+    private $pageConfig;
 
     function __construct($role = 'guest')
     {
-        $this->user_role = $role;
-        
+        $this->userRole = $role;
+        $this->iniPage();
     }
     
     
-    static public function get_user_roles() 
+//    static public function getUserRoles() 
+//    {
+//        return self::$userRoles;
+//    }
+    
+    
+    public function iniPage() 
     {
-        return self::$user_roles;
+        $head = new PageHead();
+        $this->head = $head->getHead();
     }
     
-    
-    public function getUserRole() {
-        return $this->user_role;
+    public function getUserRole() 
+    {
+        return $this->userRole;
     }
     
-    
+      
     public function setUserRole($role) {
         $res = false;
-        if (in_array($role, $this->user_roles)) {
-            $this->user_role = $role;
+        if (in_array($role, $this->userRoles)) {
+            $this->userRole = $role;
             $res = true;
         } else {
-            $this->user_role = $role;
+            $res = false;
         }
         return $res;
     }
@@ -73,6 +92,17 @@ class Page //extends АPage implements IPage
             $res = true;
         }
         return $res;
+    }
+    
+    
+    public function getBody($obj)
+    {
+        
+    }
+    
+    public function setBody($obj)
+    {
+        
     }
     
     public function getFooter() {
