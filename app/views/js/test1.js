@@ -7,4 +7,5 @@
 
 const str = '\n It is second test message';
         
-alert(str);
+//alert(str);
+console.log(str);

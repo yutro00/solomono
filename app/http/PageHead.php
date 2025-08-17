@@ -44,7 +44,7 @@ class PageHead
                 break;
 
             default:
-                $res = $this->getHeadDefault();
+                $res = $this->getHeadDefault($this->conf['js_head']);
                 break;
         }
         return $res;

@@ -12,6 +12,8 @@
 $res = require '/var/www/html/solomono/app/http/APage.php';
 $res1 = include '/var/www/html/solomono/app/http/IPage.php'; 
 $res2 = require '/var/www/html/solomono/app/http/PageHead.php';
+$res = require '/var/www/html/solomono/app/http/Body.php';
+//$res3 = require '/var/www/html/solomono/app/http/PageFooter.php';
 
 /**
  * Формирует данные для представления http страницы
@@ -19,7 +21,7 @@ $res2 = require '/var/www/html/solomono/app/http/PageHead.php';
  * @author yuriy
  */
 class Page extends APage implements IPage
-{   
+{
     /**
      * конфигурация страницы по умолчанию
      * @var Array
@@ -29,22 +31,26 @@ class Page extends APage implements IPage
         'page_type' => 'index',
         'header1' => true,
         'header2' => true,
-        'header3' => true,
+//        'header3' => true,
         'basket' => '',
         'category_count' => '8',    //число пунктов в строке категорий, не более
     ];
     
-     
-    private $userRole = 'guest';
+    private $conf;
+    
+    private $bodyObj;   //объект, содержащий составляющие(header,content,sidebar etc)
 
+    
     private $head;                  //html строка с заголовком документа
+    
     private $footer;                //html строка с подвалом документа
+    
     private $body;                  //html контент
-    private $pageConfig;
+
 
     function __construct($role = 'guest')
     {
-        $this->userRole = $role;
+        $this->conf = $this->confDefault;
         $this->iniPage();
     }
     
@@ -57,20 +63,32 @@ class Page extends APage implements IPage
     
     public function iniPage() 
     {
-        $head = new PageHead();
-        $this->head = $head->getHead();
+        $role = $this->getUserRole();
+        if ($role === 'guest') {
+            $this->conf = $this->confDefault;
+            $head = new PageHead();
+            $this->head = $head->getHead();
+            
+            $this->bodyObj = new Body($this->conf);
+
+            
+//            $this->footer = $this->getBodyObj->getFooter();
+            
+        }
+
     }
+  
     
-    public function getUserRole() 
+    public function getUserRole()
     {
-        return $this->userRole;
+        return $this->conf['user_role'];
     }
     
       
     public function setUserRole($role) {
         $res = false;
-        if (in_array($role, $this->userRoles)) {
-            $this->userRole = $role;
+        if (in_array($role, $this->conf['user_role'])) {
+            $this->conf['user_role'] = $role;
             $res = true;
         } else {
             $res = false;
@@ -78,7 +96,10 @@ class Page extends APage implements IPage
         return $res;
     }
     
-    
+    /**
+     * возвращает html строку с заголовком документа
+     * @return String
+     */
     public function getHead() {
         return $this->head;
     }
@@ -95,25 +116,57 @@ class Page extends APage implements IPage
     }
     
     
-    public function getBody($obj)
+    public function getBodyObj($obj = null)
     {
-        
+        return $this->bodyObj;
     }
     
+    
+    public function getHeader()
+    {
+        return $this->bodyObj->getHeader();
+    }
+    
+    
+    
+    
+    public function getBody($arr)
+    {
+        $res = $this->bodyObj->getContent($arr);
+        return $res;
+    }
+    
+    /**
+     * реализация интерфейса setBody($obj)
+     * @param type $obj
+     */
     public function setBody($obj)
     {
         
     }
     
-    public function getFooter() {
-        return $this->footer;
+    
+    
+    
+    public function getFooter() 
+    {
+        $res; 
+        if (isset($this->bodyObj)) {
+            $res = $this->bodyObj->getFooter();
+        } else {
+            $res = null;
+        }
+        return $res;
     }
     
     
-    public function setFooter($obj) {
+    public function setFooter($str) {
         $res = null;
-        if (is_object($obj)) {
-            $this->footer = $obj;
+        if ($this->conf['user_role'] === 'admin') {
+            
+        }
+        if (is_string($str)) {
+            $this->footer = $str;
         } else {
             $res = true;
         }

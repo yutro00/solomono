@@ -10,7 +10,8 @@ const curr_time = new Date();
 const now = get_curr_time(curr_time); 
 const msg = '\n   It is test message';
         
-alert( now + msg);
+//alert( now + msg);
+console.log( now + msg);
 
 /**
  * возвращает входное время в виде отформатированной строки
