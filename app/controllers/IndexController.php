@@ -36,17 +36,18 @@ class IndexController
         $res .= $head;
         
         $res .= '<body>';
-        $res .= '<div class="page-wrap">';
         
         $header = $page->getHeader();
         $res .= $header;
         
+        $res .= '<div class="page-wrap">';
         
-$bodyParam = [
-    'sidebar_data' => 'It is the sidebar data',
-    'content_data' => 'It is the content data',
-];
-        $body = $page->getBody($bodyParam);
+        
+        $bodyData = [
+            'sidebar_data' => 'It is the sidebar data',
+            'content_data' => 'It is the content data',
+        ];
+        $body = $page->getBody($bodyData);
         $res .= $body;
         
         $res .= '</div>     <!-- page-wrap -->';

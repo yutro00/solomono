@@ -47,10 +47,6 @@ class Body
     
     public function getContent($arr) 
     {
-//        $data = [
-//            'sidebar_data' => 'It is the sidebar data',
-//            'content_data' => 'It is the content data',
-//        ];
         return $this->content->getContent($arr);
     }
     

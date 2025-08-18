@@ -13,10 +13,8 @@
 class PageHeader2 
 {
     public function getHeader()
-    {
-        $res = '<div class="header1">';
-        $res .= "\nIt is the header2 string";
-        $res .= "\n</div>";
+    {   
+        $res = include '/var/www/html/solomono/app/views/templates/header2IndexTempl.php';  
         return $res;
     }
 }

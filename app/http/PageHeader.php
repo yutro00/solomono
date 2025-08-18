@@ -7,6 +7,7 @@
 
 $res = require '/var/www/html/solomono/app/http/PageHeader1.php';
 $res1 = require '/var/www/html/solomono/app/http/PageHeader2.php';
+$res2 = require '/var/www/html/solomono/app/http/PageHeader3.php';
 
 /**
  * Description of JPageHeader
@@ -20,11 +21,13 @@ class PageHeader
         'page_type' => 'index',
         'header1' => true,
         'header2' => true,
+        'header3' => true,
     ];
     private $conf;
     
     private $header1 = null;
     private $header2 = null;
+    private $header3 = null;
 
     
     public function __construct($cfg)
@@ -39,6 +42,9 @@ class PageHeader
         }
         if ($this->conf['header2'] <> '') {
             $this->header2 = new PageHeader2();
+        }
+        if ($this->conf['header3'] <> '') {
+            $this->header3 = new PageHeader3();
         }
     }
     
@@ -61,7 +67,10 @@ $res .= '<header class="header">';
         if ($this->conf['header2']) {
             $res .=  $this->header2->getHeader();
         }
-$res .= '</header>';        
+        if ($this->conf['header3']) {
+            $res .=  $this->header3->getHeader();
+        }
+        $res .= '</header>';
 
         
         return $res;

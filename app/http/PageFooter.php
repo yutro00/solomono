@@ -63,16 +63,8 @@ class PageFooter
                 $script_link .= "<script src=\"/app/views/js/$arr[$i]\"></script>\n";
             }
         }
-        
-        $res .= "<footer class=\"footer\">\n"
-                . "<div class=\"subfooter\">\n"
-                . "It is the first layer of footer\n"
-                . "</div>\n";
-        
-        $res .= "<div class=\"subfooter\">\n"
-                . "It is the second layer of footer\n"
-                . "</div>\n";
-        $res .= '</footer>';
+        $res .= include '/var/www/html/solomono/app/views/templates/footerIndexTempl.php';
+
         return $res;
     }
     

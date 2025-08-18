@@ -81,14 +81,11 @@ class PageContent
             $sidebar_right = $this->getSidebarRight($cfg);
         }
         
-$res .= $sidebar_left;
+        $res .= $sidebar_left;
 
         $content_main = $this->getContentMain($cfg, $data['content_data']);
-$res .= $content_main;
+        $res .= $content_main;
 
-        
-//        $res .= 'ADFSDFSDFDSFDSF<br>';
-//        $res .= 'BBBBBBB<br>';
         
         $res .= '</div>';
         $res .= '</main>';
@@ -99,8 +96,8 @@ $res .= $content_main;
     private function getSidebarLeft($param, $data) 
     {
         $res = '<aside class="sidebar-left">'
-        . "It is the sidebar<br>"
         . $data
+//        . "It is the sidebar<br>"
         . '</aside>';
         
         return $res;

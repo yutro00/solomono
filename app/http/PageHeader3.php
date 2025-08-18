@@ -6,15 +6,16 @@
  */
 
 /**
- * Description of PageHeader1
+ * Description of PageHeader3
  *
  * @author yuriy
  */
-class PageHeader1 
+class PageHeader3 
 {
+    
     public function getHeader()
     {
-        $res = include '/var/www/html/solomono/app/views/templates/header1IndexTempl.php';
+        $res = include '/var/www/html/solomono/app/views/templates/header3IndexTempl.php'; 
         return $res;
     }
     
