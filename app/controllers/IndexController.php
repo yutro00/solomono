@@ -13,7 +13,10 @@
 //$res = require_once 'constants.php';
 //echo '<br> var $domain_root = ' . $domain_root . '<br>';
 
-$resPage = require '/var/www/html/solomono/app/http/Page.php';
+
+$res = require '/var/www/html/solomono/app/http/Page.php';
+$res1 = require '/var/www/html/solomono/app/database/Database.php';
+
 
 //use app\http\Page;
 
@@ -24,6 +27,18 @@ $resPage = require '/var/www/html/solomono/app/http/Page.php';
  */
 class IndexController 
 {
+    
+    public function getDbConnection()
+    {
+        try {
+            $db = new Database();
+            $conn = $db->getConnection();
+        } catch (Exception $exc) {
+            $conn = null;
+            echo $exc->getTraceAsString();
+        }   
+        return $conn;
+    }
     
     public function index() 
     {
@@ -42,6 +57,8 @@ class IndexController
         
         $res .= '<div class="page-wrap">';
         
+        $connect = $this->getDbConnection();
+//        $categores =  
         
         $bodyData = [
             'sidebar_data' => 'It is the sidebar data',
