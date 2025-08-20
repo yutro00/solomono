@@ -1,8 +1,8 @@
 <?php
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
+/* 
+ * Project Solomono test
+ * Контроллек начальной страницы
  */
 
 //namespace app\controllers;
@@ -14,9 +14,9 @@
 //echo '<br> var $domain_root = ' . $domain_root . '<br>';
 
 
-$res = require '/var/www/html/solomono/app/http/Page.php';
-$res1 = require '/var/www/html/solomono/app/database/Database.php';
-$res2 = require '/var/www/html/solomono/app/database/models/CategoryModel.php';
+require '/var/www/html/solomono/app/database/Database.php';
+require '/var/www/html/solomono/app/http/Page.php';
+require '/var/www/html/solomono/app/database/models/CategoryModel.php';
 
 
 /**
@@ -29,8 +29,13 @@ class IndexController
     
     public function getDbConnection()
     {
+        $dbParams = [];
+        $dbParams['host'] = Config::getConfig()['database']['host'];
+        $dbParams['user'] = Config::getConfig()['database']['user'];
+        $dbParams['psw'] = Config::getConfig()['database']['password'];
+        $dbParams['dbname'] = Config::getConfig()['database']['dbname'];
         try {
-            $db = new Database();
+            $db = new Database($dbParams);
             $conn = $db->getConnection();
         } catch (Exception $exc) {
             $conn = null;

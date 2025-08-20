@@ -1,7 +1,7 @@
 <?php
 
 /* 
- * Solomono test1
+ * Project Solomono test
  * точка входа на сайт 
  */
 
@@ -13,11 +13,13 @@ require_once 'constants.php';
 
 Config::setConfig();  //загружаем конфигурацию обязательно!!!
 
+
 //режим отладки
 $debug = Config::getConfig()['app']['debug'];
 if ($debug) {
     ini_set('display_startup_errors', 1);
-    ini_set('display_errors', 1); //error_reporting(E_ALL);
+    ini_set('display_errors', 1); 
+    error_reporting(E_ALL);
 }
 
 $request_uri = $_SERVER['REQUEST_URI'];

@@ -1,8 +1,8 @@
 <?php
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
+/* 
+ * Project Solomono test
+ * Класс конфигурации проекта
  */
 
 /**
@@ -33,43 +33,6 @@ class Config
     
     static public function getConfig()
     {
-        $res = self::$conf;
-        return $res;
-        
-//        if (isset($param)) {
-//            $section = self::getSectionName($param);
-//        } else {
-//            $res = self::$conf;
-//        }
-//        return $res;
-    }
-    
-    /**
-     * не нужен !!!
-     * @param S $key
-     * @return Array
-     */
-    static private function getSections()
-    {
-//        $res = ['app', 'database'];
-//        return $res;
-    }
-    
-    /**
-     * возвращает значение имя с или null, если не находит
-     * @param Array $sections - массив секций 
-     * @param Srting $key
-     * @return String || null
-     */
-    static private function getSectionName($key)
-    {
-        $res = null;
-        for ($i = 0; $i < count(self::$sections); $i++) {
-            if (array_key_exists($key, self::$sections)) {
-                $res = $sections[$i];
-            }
-        }
-        return $res;
-    }
-            
+        return self::$conf;
+    }            
 }
