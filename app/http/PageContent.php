@@ -92,17 +92,49 @@ class PageContent
         return $res;
     }
     
-    
-    private function getSidebarLeft($param, $data) 
+    /**
+     * возвращает html строку с левым сайдбаром
+     * @param Array $param - массив с конфигурацией сайдбара
+     * @param String $catData - UL html строка с категориями товара
+     * @return string
+     */
+    private function getSidebarLeft($param, $catDataStr) 
     {
-        $res = '<aside class="sidebar-left">'
-        . $data
-//        . "It is the sidebar<br>"
-        . '</aside>';
+        $res = '<aside class="sidebar-left">';
+        $res .= $this->getCategoryLeft($catDataStr);
         
+        
+$filterDataStr = '<div>Filter1 html contcainer</div>'       //Временно!!! Как пример
+        . '<div>Filter2  html contcainer</div>'
+        . '</div>';
+        $res .= $this->getFilterLeft($filterDataStr);
+        
+        
+        $res .= '</aside>';
         return $res;
     }
     
+    /**
+     * возвращает html DIV с содержимым $str 
+     * @param Str $str - строка категорий товара
+     * @return string
+     */
+    public function getCategoryLeft($str)
+    {
+        $res = '<div class=category-wrap>';
+        $res .=  $str;
+        $res .= '</div>';
+        return $res;
+    }
+
+
+    public function getFilterLeft($str)
+    {
+        $res = '<div class=filter-wrap>';
+        $res .=  $str;
+        $res .= '</div>';
+        return $res;
+    }
     
     private function getSidebarRight($param) 
     {

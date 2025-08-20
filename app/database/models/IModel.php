@@ -13,11 +13,12 @@
 interface IModel 
 {
     
-    public function create();
     
-    public function read();
+    public function create($arr);
     
-    public function update();
+    public function read($sql);
     
-    public function delete();
+    public function update($sql);
+    
+    public function delete($id);
 }

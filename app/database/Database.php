@@ -14,6 +14,7 @@
 class Database 
 {
     private $cfg = '/var/www/html/solomono/app/config/config.ini';
+    private $lang = 'en';
     private $host = "localhost";
     private $dbname = "smtest_bd";
     private $user = "guest";
@@ -32,9 +33,9 @@ class Database
         
         $this->connection = new mysqli($this->host, $this->user, $this->psw, $this->dbname);
 
-        if ($this->connection->connect_error) {
-            die("Connection failed: " . $this->connection->connect_error);
-        }
+//        if ($this->connection->connect_error) {
+//            die("Connection failed: " . $this->connection->connect_error);
+//        }
     }
     
     
@@ -45,15 +46,25 @@ class Database
             die("Файл конфигурации не найден.");
         }
         
+        $this->lang = $conf['app']['lang'];
         $this->host = $conf['database']['host'];
         $this->dbname = $conf['database']['dbname'];
         $this->user = $conf['database']['user'];
         $this->psw = $conf['database']['password'];
+        
+        
     }
     
     
     public function getConnection() 
     {
-        return $this->connection;       
+        
+        return $this->connection;      
+    }
+    
+    
+    public function getLang() 
+    {   
+        return $this->lang;
     }
 }

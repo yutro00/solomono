@@ -16,9 +16,8 @@
 
 $res = require '/var/www/html/solomono/app/http/Page.php';
 $res1 = require '/var/www/html/solomono/app/database/Database.php';
+$res2 = require '/var/www/html/solomono/app/database/models/CategoryModel.php';
 
-
-//use app\http\Page;
 
 /**
  * Контроллер индексной страницы сайта
@@ -35,10 +34,17 @@ class IndexController
             $conn = $db->getConnection();
         } catch (Exception $exc) {
             $conn = null;
+        echo '<div>'
+            . '<b>Oшибка при соединении с БД.</b><br>'
+            . 'Проверьте наличие БД и параметры подключения в файле config.ini. '
+            . 'При отсутствии БД запустите скрипт db.sql из папки app/backup.'
+            . ' <br>Читайте readme.'
+            . '<br></div>';
             echo $exc->getTraceAsString();
         }   
         return $conn;
     }
+    
     
     public function index() 
     {
@@ -58,11 +64,13 @@ class IndexController
         $res .= '<div class="page-wrap">';
         
         $connect = $this->getDbConnection();
-//        $categores =  
+        $categoryModel = new CategoryModel($connect, 'category');
+        $category = $categoryModel->getCategories();
+//        $category = $categoryModel->getCategoriesAsUl();
         
         $bodyData = [
-            'sidebar_data' => 'It is the sidebar data',
             'content_data' => 'It is the content data',
+            'sidebar_data' => $category,
         ];
         $body = $page->getBody($bodyData);
         $res .= $body;
