@@ -5,15 +5,20 @@
  * точка входа на сайт 
  */
 
-//use app\controllers\IndexController;
-
-//выводим ошибки
-ini_set('display_startup_errors', 1); 
-ini_set('display_errors', 1); error_reporting(E_ALL);
-
+require_once '/var/www/html/solomono/app/config/Config.php';
 //подключаем маршруты и данные
 require_once 'routes.php';
 require_once 'constants.php';
+
+
+Config::setConfig();  //загружаем конфигурацию обязательно!!!
+
+//режим отладки
+$debug = Config::getConfig()['app']['debug'];
+if ($debug) {
+    ini_set('display_startup_errors', 1);
+    ini_set('display_errors', 1); //error_reporting(E_ALL);
+}
 
 $request_uri = $_SERVER['REQUEST_URI'];
 $host = $_SERVER['HTTP_HOST'];
