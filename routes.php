@@ -7,8 +7,9 @@
 
 // Маршруты
 $routes = [
+    '' => ['controller' => 'IndexController', 'action' => 'index'],
     '/' => ['controller' => 'IndexController', 'action' => 'index'],
-    '/style.css' => ['controller' => 'IndexController', 'action' => 'getStyle'],
-    '/about' => ['controller' => 'PageController', 'action' => 'about'],
-    '/contact' => ['controller' => 'PageController', 'action' => 'contact'],
+    '/goods' => ['controller' => 'IndexController', 'action' => 'goodsByCategory'],
+    '/about' => ['controller' => 'IndexController', 'action' => 'about'],
+//    '/contact' => ['controller' => 'PageController', 'action' => 'contact'],
 ];

@@ -56,11 +56,12 @@ class PageHeader
      */
     public function getHeader()
     {
-        $res = '';
+        $res = "\n";
         
-$res .= '<header class="header">';
+        $res .= '<header class="header">';
         
-        if ($this->conf['header1']) {   
+        if ($this->conf['header1']) {
+            $res .=  "\n";
             $res .=  $this->header1->getHeader();
         }
         
@@ -70,7 +71,7 @@ $res .= '<header class="header">';
         if ($this->conf['header3']) {
             $res .=  $this->header3->getHeader();
         }
-        $res .= '</header>';
+        $res .= "\n" . '</header>';
 
         
         return $res;

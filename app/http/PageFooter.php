@@ -15,7 +15,7 @@ class PageFooter
     private $confDefault = [
         'page_type' => 'index',
         'user_role' => 'guest',
-        'js_bottom' => ['test1.js']
+        'js_bottom' => ['index.js']
     ];
     
     private $conf;

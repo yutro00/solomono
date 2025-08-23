@@ -6,6 +6,7 @@
  */
 
 require_once '/var/www/html/solomono/app/config/Config.php';
+require_once '/var/www/html/solomono/app/database/Database.php';
 //подключаем маршруты и данные
 require_once 'routes.php';
 require_once 'constants.php';
@@ -13,22 +14,50 @@ require_once 'constants.php';
 
 Config::setConfig();  //загружаем конфигурацию обязательно!!!
 
-
 //режим отладки
 $debug = Config::getConfig()['app']['debug'];
 if ($debug) {
     ini_set('display_startup_errors', 1);
-    ini_set('display_errors', 1); 
-    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+//    error_reporting(E_ALL);
+    error_reporting(E_ERROR);
 }
 
-$request_uri = $_SERVER['REQUEST_URI'];
-$host = $_SERVER['HTTP_HOST'];
+setDbConnection();      //устанавливаем связь с БД
 
+
+
+$request_uri = $_SERVER['REQUEST_URI'];
+//$request = 
+
+$request = str_replace('/index.php', '', $request_uri);
+
+$path1 = $_SERVER['PHP_SELF'];
+$path = str_replace('/index.php', '', $path1);
+
+
+$request1 = $_REQUEST;
+$host = $_SERVER['HTTP_HOST'];
+$var1 = $_SERVER['SERVER_NAME'];
+$var2 = $_SERVER['QUERY_STRING'];
+
+$cat = null;
+$limit = null;
+if (isset($_GET['cat'])) {
+    $cat = $_GET['cat'];
+}
+if (isset($_GET['limit'])) {
+    $limit = $_GET['limit'];
+}
+
+$var3 = '';
+//php как парсить http запрос
 
 // определяем маршрут
-if (array_key_exists($request_uri, $routes)) {
-    $route = $routes[$request_uri];
+//if (array_key_exists($request_uri, $routes)) {
+//    $route = $routes[$request_uri];
+if (array_key_exists($path, $routes)) {
+    $route = $routes[$path];
     $controllerName = $route['controller'];
     $actionName = $route['action'];
 
@@ -42,18 +71,27 @@ if (array_key_exists($request_uri, $routes)) {
     } catch (Exception $exc) {
         echo $exc->getTraceAsString();
     }
-    $controller->$actionName();
-    
-//  $nm = __NAMESPACE__;
-//  if ($nm === '') {
-//    echo 'empty root NAMESPACE';
-//  } else {
-//    echo $nm;
-//  }
-  
-  
+    $controller->$actionName(); 
 } else {
     // Обработка 404 ошибки
-//    http_response_code(404);
-    echo "404 Not Found";
+    http_response_code(404);
+//    echo "page $request_uri 404 Not Found";
+}
+
+
+function getDbParams()
+{
+    $dbParams = [];
+    $dbParams['host'] = Config::getConfig()['database']['host'];
+    $dbParams['user'] = Config::getConfig()['database']['user'];
+    $dbParams['psw'] = Config::getConfig()['database']['password'];
+    $dbParams['dbname'] = Config::getConfig()['database']['dbname'];
+    return $dbParams;
+}
+
+
+function setDbConnection()
+{
+    $params = getDbParams();
+    Database::setConnection($params);
 }

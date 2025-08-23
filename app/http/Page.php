@@ -71,13 +71,25 @@ class Page extends APage implements IPage
             
             $this->bodyObj = new Body($this->conf);
 
-            
 //            $this->footer = $this->getBodyObj->getFooter();
-            
         }
-
     }
   
+    /**
+     * возвращает строку с началом документа (head && header)
+     * @return string
+     */
+    public function getPageBeginning()
+    {
+        $res = $this->startDocument();
+        $res .= $this->getHead();
+        
+        $res .= "\n\n<body>";
+        $res .= $this->getHeader();
+        $res .= "\n\n";
+
+        return $res;
+    }
     
     public function getUserRole()
     {
@@ -93,6 +105,17 @@ class Page extends APage implements IPage
         } else {
             $res = false;
         }
+        return $res;
+    }
+    
+    /**
+     * открывает HTML Document (<!DOCTYPE html> ... )
+     * @return type
+     */
+    public function startDocument()
+    {
+        $res = "<!DOCTYPE html>\n"
+               . '<html lang="en">' . "\n";
         return $res;
     }
     
@@ -128,9 +151,14 @@ class Page extends APage implements IPage
     }
     
     
-    
-    
     public function getBody($arr)
+    {
+        //здесь доп. контент, если надо
+        $res = $this->getContent($arr);
+        return $res;
+    }
+    
+    public function getContent($arr)
     {
         $res = $this->bodyObj->getContent($arr);
         return $res;
@@ -145,9 +173,10 @@ class Page extends APage implements IPage
         
     }
     
-    
-    
-    
+    /**
+     * возвращает футер, если он нужен в составе основного контента   
+     * @return null
+     */
     public function getFooter() 
     {
         $res; 
@@ -172,8 +201,5 @@ class Page extends APage implements IPage
         }
         return $res;
     }
-    
-
-    
 
 }

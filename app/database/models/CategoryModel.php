@@ -39,6 +39,7 @@ class CategoryModel implements IModel
         'create' => '',
         'read_all' => 'SELECT * FROM category',
         'read_cat' => 'SELECT id, name, description, parent_id FROM category WHERE active = 1 AND parent_id IS NULL',
+        'read_cat_byname' => 'SELECT id, name, description, parent_id FROM category WHERE active = 1 AND parent_id IS NULL order by name',
         'read_subcat' => 'SELECT id, name, description, parent_id FROM category WHERE active = 1 AND parent_id IS NOT NULL',
         'update' => '',
         'delete' => '',
@@ -48,10 +49,9 @@ class CategoryModel implements IModel
 
 
 
-    public function __construct($conn, $tableName) 
+    public function __construct($conn)
     {
         $this->connection = $conn; 
-        $this->tableName = $tableName;
 //НЕ УДАЛЯТЬ!!!        $this->fieldsList = $this->getFieldsList($this->sql['list'], $this->tableName);   
     }
 
@@ -115,7 +115,6 @@ class CategoryModel implements IModel
             $rows[] = $row;
         }
         return $rows;
-        
     }
     
     
@@ -124,8 +123,6 @@ class CategoryModel implements IModel
         $catArr = $this->readCategories();
         $subcatArr = $this->readSubcategories();
         $arr = $this->assembleCategories($catArr, $subcatArr);
-
-//        $res = $this->getCategoriesAsUl_1($arr);
         $res = $this->getUlTag($arr);
         return $res;
     }
@@ -231,7 +228,9 @@ $lang = 'en';       //ВРЕМЕННО!!!
     
     public function getUlTag($arr)
     {
-        $res = '<ul id = "sbleft_category" class="sbleft_category">';
+        $res = "\n";
+        $res .= "\n" . '<ul id = "sbleft_category" class="sbleft_category">';
+        $res .= "\n";
         $res .= $this->getLiTag($arr[0], '', 'sbleft-li-selected');
         for ($i = 1; $i < count($arr); $i++) {
             if (is_null($arr[$i]['sub_cat'])) {
@@ -256,20 +255,20 @@ $lang = 'en';       //ВРЕМЕННО!!!
     private function getLiTag($arr, $more = '', $class = '')
     {
         if (!$class) {
-            $res = '<li>';
+            $res = "\n<li>";
         } else {
-            $res = "<li class=\"$class\">";
+            $res = "\n<li class=\"$class\">";
         }
-        
-        $res .= '<a href="#">';
+        $id = 'cat_' . $arr['id'];
+        $res .= "\n<a id = \"$id\" href=\"#\">";
         $res .= $arr['name'];
         if ($more <> '') {
             $res .= '<span class="sbleft-more">&raquo;</span>';
 $subCat = $this->getSubcatStr($arr['sub_cat'], 'sbleft_subcategory' );    //
         }
-        $res .= '</a>';
+        $res .= "\n</a>";
 $res .= $subCat;
-        $res .= '</li>';
+        $res .= "\n</li>";
         return $res;
     }
   
@@ -289,33 +288,16 @@ $res .= $subCat;
             } else {
                 $res .= "<li class=\"$class\">";
             }
-
-            $res .= $arr[$i]['name'];
+            $id = 'cat_' . $arr[$i]['id'];
+            $res .= "<a id = \"$id\" href=\"#\">";
+            $res .= $arr[$i]['name'];            
+            $res .= '</a>';
             $res .= '</li>';
         }
-//        $res .= '<li>';
-//        $res .= $arr['name'];
-//        $res .= '</li>';
         $res .= '</ul>';
-//Временно, так нельзя стразу закрывать  UL !!!
+
         return $res;
     }
-    
-    
-// НЕ ИСПОЛЬЗУЕТСЯ!!! можно удалять    
-//    private function getLiTagWithTags($arr)
-//    {
-//        $res = '<li>';
-//        $res .= '<details>';
-//        $res .= '<summary class="sbleft-more">';
-//        $res .= $arr['name'];
-//        $res .= '<span class="sbleft-more">&gt;</span>';
-//        $res .= '</summary>';
-//        $res .= '</details>';
-//        $res .= '</li>';
-//        return $res;
-//    }
-
 
 
     public function close()
@@ -325,7 +307,7 @@ $res .= $subCat;
 
     
     
-    /** ПОКА не нужен!!!
+    /** ПОКА не используется !!!
      * записывает в свойство объекта массив имен полей таблицы
      * @param String $sql
      * @param String $tableName

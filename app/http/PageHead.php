@@ -5,6 +5,8 @@
  * Объект формирования заголовка документа
  */
 
+include '/var/www/html/solomono/app/views/templates/headIndexTempl.php';
+
 /**
  * Description of PageHead
  *
@@ -15,7 +17,7 @@ class PageHead
     private $confDefault = [
         'page_type' => 'index',
         'user_role' => 'guest',
-        'js_head' => ['test.js', 'test1.js'],
+        'js_head' => ['index.js'],
     ];
     
     private $conf;
@@ -63,9 +65,7 @@ class PageHead
                 $script_link .= "<script src=\"/app/views/js/$arr[$i]\"></script>\n";
             }
         }
-        
-        include '/var/www/html/solomono/app/views/templates/headIndexTempl.php';
-
+        $res .= getHeadIndexTemplate($script_link);
         return $res;
     }
     

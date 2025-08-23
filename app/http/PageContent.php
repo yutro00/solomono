@@ -44,20 +44,16 @@ class PageContent
     }
 
 
-
-
-
-
     /**
-     * возвращает html строку с контентом страницы
+     * возвращает html строку с основным контентом страницы
      * @return String
      */
     public function getContent($data) 
     {
         $res = '';
+        $res .= "\n";
+//        $res .= '<main class="main">';
         
-        $res .= '<main class="main">';
-        $res .= '<div class="container">';
         if ($this->conf['sidebar_left'] && $this->conf['sidebar_right'] ) {
             $cfg = [
                 
@@ -87,8 +83,8 @@ class PageContent
         $res .= $content_main;
 
         
-        $res .= '</div>';
-        $res .= '</main>';
+//        $res .= "\n\n\n\n</div>";
+//        $res .= "\n</main>";
         return $res;
     }
     
@@ -100,17 +96,18 @@ class PageContent
      */
     private function getSidebarLeft($param, $catDataStr) 
     {
-        $res = '<aside class="sidebar-left">';
+        $res = "\n" . '<aside class="sidebar-left">';
         $res .= $this->getCategoryLeft($catDataStr);
         
         
-$filterDataStr = '<div>Filter1 html contcainer</div>'       //Временно!!! Как пример
-        . '<div>Filter2  html contcainer</div>'
-        . '</div>';
+$filterDataStr = "\n<div>Filter1 html container</div>"       //Временно!!! Как пример
+        . "<div>Filter2  html contcainer</div>"
+        . '';
+//        . '</div>';
         $res .= $this->getFilterLeft($filterDataStr);
         
         
-        $res .= '</aside>';
+        $res .= "\n" . '</aside>';
         return $res;
     }
     
@@ -120,19 +117,20 @@ $filterDataStr = '<div>Filter1 html contcainer</div>'       //Временно!!
      * @return string
      */
     public function getCategoryLeft($str)
-    {
-        $res = '<div class=category-wrap>';
+    {   
+        $res = "\n";
+        $res .= '<section class=category-wrap>';
         $res .=  $str;
-        $res .= '</div>';
+        $res .= "\n" . '</section>';
         return $res;
     }
 
 
     public function getFilterLeft($str)
     {
-        $res = '<div class=filter-wrap>';
+        $res = "\n" .'<sectin class=filter-wrap>';
         $res .=  $str;
-        $res .= '</div>';
+        $res .= "\n" . '</sectin>';
         return $res;
     }
     
@@ -150,9 +148,56 @@ $filterDataStr = '<div>Filter1 html contcainer</div>'       //Временно!!
     
     private function getContentMain($param, $data) 
     {
-        $res = '<div class="content-main">';
-        $res .= $data;
-        $res .= '</div>';
+//        $res = "\n\n" . '<div class="content-main">';
+        $res = "\n\n" . '<main class="main">';
+        
+        $res .= "\n" . '<section class="main-header">  <!-- content-header -->';
+        
+        $res .= "\n" . '<div class="content-breadscrumb">';
+          $res .= 'It is » breadscrumb';
+        $res .= "\n</div>";
+        
+        $res .= "\n" . '<h2 id="category_name" class="category-head">&nbsp;</h2>';
+        
+        $res .= "\n" . '<div class="goods-options">';
+        
+        $res .= "\n <span class=\"goods-view\">Show";
+        $res .=  "\n" . '<select id="goods_view">';
+        $res .= '<option value="columns">by columns';
+        $res .= '<option value="list">by list';
+        $res .= "\n" . '</select>';
+        $res .= "\n</span>";
+                                        
+        $res .= "\n <span class=\"goods-limit\">Per page";
+        $res .= "\n" . '<select id="goods_limit">';
+        $res .= '<option value="10">10';
+        $res .= '<option value="20">20';
+        $res .= '<option value="50">50';
+        $res .= '<option value="100">100';
+        $res .= "\n" . '</select>';
+        $res .= "\n</span>";
+        
+        $res .= "\n <span class=\"goods-order\">Order";
+        $res .= "\n" . '<select id="goods_order">';
+        $res .= '<option value="alphabet">Alphabetically';
+        $res .= '<option value="rate">Best rated';
+        $res .= '<option value="price&uarr;">Price &uarr;';
+        $res .= '<option value="price&darr">Price &darr;';
+        $res .= '<option value="newesst">Newest';
+        $res .= "\n" . '</select>';
+        $res .= "\n</span>";
+
+        $res .= "\n</div>"  .  '<!-- .goods-options -->';
+        
+        $res .= "\n</section>"  . '<!-- .main-header -->';
+
+//        $res .= "\n\n" . '<section id = "goods" class="content-main">';
+        $res .= "\n\n" . '<section id = "goods" class="main-content">';
+          $res .= $data;
+        $res .= "\n</section>"  .  '<!-- .goods -->';
+        
+        $res .= "\n</main>";
+        
         return $res;
     }
     

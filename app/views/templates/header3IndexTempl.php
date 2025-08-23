@@ -5,23 +5,24 @@
  * Шаблон 3-го уровня шапки индексного файла
  */
 
-$res = '<div class="header3">';
-$res .= '<ul class="navbar">'
-                . '<li>'
+$res = "\n" . '<div class="header3">';
+$res .= "\n" . '<ul class="navbar">'
+                . "\n<li>"
                 . '<a href="#">Item1</a>'
-                . '</li>'
-                . '<li>'
+                . "\n</li>"
+                . "\n<li>"
                 . '<a href="#">Item2&raquo;</a>'
                 . '</li>'
-                . '<li>'
+                . "\n<li>"
                 . '<a href="#">Item3</a>'
                 . '</li>'
-                . '<li>'
+                . "\n<li>"
                 . '<a href="#">Item4</a>'
                 . '</li>'
-                . '<li>'
+                . "\n<li>"
                 . '<a href="#">Item5</a>'
-                . '</li>'
+                . "\n<li>"
+                .  "\n" 
                 . '</ul>';
 $res .= "\n</div>";
     

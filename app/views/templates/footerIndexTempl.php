@@ -7,6 +7,7 @@
 
 return 
 
+"\n\n" . 
 '<footer class="footer">
     <div class="subfooter">
         It is the first layer of footer
