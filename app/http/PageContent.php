@@ -163,8 +163,8 @@ $filterDataStr = "\n<div>Filter1 html container</div>"       //Временно!
         
         $res .= "\n <span class=\"goods-view\">Show";
         $res .=  "\n" . '<select id="goods_view">';
-        $res .= '<option value="columns">by columns';
-        $res .= '<option value="list">by list';
+        $res .= '<option value="columns">as columns';
+        $res .= '<option value="list">as list';
         $res .= "\n" . '</select>';
         $res .= "\n</span>";
                                         

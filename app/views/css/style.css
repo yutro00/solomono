@@ -38,7 +38,36 @@ body {
     height: 30px;
     padding-left: 5%;
     box-sizing: border-box;
-    background-color: var(--main-bg-color);
+    background-color: #f5f5f5;
+}
+.lang-select, .currency-select {
+    float: left;
+    margin-top: 4px;
+    margin-right: 20px;
+}
+.phone {
+    display: inline-block;
+    float: left;
+    margin-top: 2px;
+}
+.nav-header {
+    float: left;
+    display: flex;
+    list-style-type: none;
+    margin-top: 2px;
+}
+.nav-header #readme {
+    text-decoration: underline;
+    cursor: pointer;
+} 
+.nav-header li {
+    padding-left: 15px;
+}
+.login {
+    display: inline-block;
+    float: left;
+    margin-top: 2px;
+    margin-left: 20px;
 }
 .header2 {
     margin: 0 0 0 5%;

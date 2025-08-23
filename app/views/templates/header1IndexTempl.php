@@ -8,7 +8,30 @@
 
 
 $res = '<div class="header1">'
-    . "\nIt is the content of header1"
-    . "\n</div>";
+        . "\n"
+        . '<select class="lang-select">'
+        . "\n" . '<option value="en" selected>English</option>'
+        . "\n" . '<option value="ua">Український</option>'
+        . "\n" . '/<select>'
+        . "\n"
+        . '<select class="currency-select">'
+        . "\n" . '<option value="en" selected>US</option>'
+        . "\n" . '<option value="ua">UAH</option>'
+        . "\n" . '/<select>'
+        . "\n"
+        . '<span class="phone">Phone:   +38 097 829-79-89'
+        . '</span>'
+        . "\n"
+    . '<ul class="nav-header">
+        <li id="readme" >README!</li>
+        <li><a href="/">Home</a></li>
+        <li><a href="brands">Brands</a></li>
+        <li><a href="payment-and-shipping/a-79.html">Payment and Shipping</a></li>
+        <li><a href="warranty/a-80.html">Warranty</a></li>
+        <li><a href="contact_us.php">Contacts</a></li>'
+        . "\n" 
+        . '</ul>'
+        . '<span><a id="login" class="login">Log in</a></span>'
+        . "\n</div>";
 
 return $res;
