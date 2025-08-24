@@ -6,6 +6,8 @@
  */
 
 require '/var/www/html/solomono/app/http/Sidebar.php';
+require '/var/www/html/solomono/app/http/ContentHeader.php';
+require '/var/www/html/solomono/app/http/ContentMain.php';
 
 
 /**
@@ -26,6 +28,10 @@ class PageContent
     
     private $sidebar;
     
+//private $content;
+    private $contentHeader;     //шапка основного контента
+    private $contentMain;       //основной контент страницы (тег MAIN)
+    
     
     public function __construct($params = null) 
     {
@@ -37,10 +43,24 @@ class PageContent
         if ($this->conf['sidebar_left'] && $this->conf['sidebar_right']) {
             $sbConf = [];
             $this->sidebar = new Sidebar($sbConf);
-        } else {
-            $this->sidebar = new Sidebar();
         }
+        if ($this->conf['sidebar_left']) {
+            $sidebarCfg = [];
+            $sidebarCfg['sidebar'] = 'left';
+            $sidebarCfg['width'] = '33%';
+            $this->sidebar = new Sidebar($sidebarCfg);
+        }
+        $this->contentHeader = new ContentHeader();
+        $this->contentMain = new ContentMain();
         
+    }
+
+
+    public function getSidebar()
+    {
+        $res = '';
+        $res .= $this->sidebar->getSidebar();
+        return $res;
     }
 
 
@@ -52,14 +72,7 @@ class PageContent
     {
         $res = '';
         $res .= "\n";
-//        $res .= '<main class="main">';
         
-        if ($this->conf['sidebar_left'] && $this->conf['sidebar_right'] ) {
-            $cfg = [
-                
-            ];
-            $this->getSidebarTwo($cfg);
-        }
         if ($this->conf['sidebar_left'] ) {
             $cfg = [
                 'sidebar' => 'left',
@@ -67,160 +80,41 @@ class PageContent
                 'sidebar_data'  => 'It is sidebar data',
                 'content_data'  => 'It is sidebar data'
             ];
-            $sidebar_left = $this->getSidebarLeft($cfg, $data['sidebar_data']);
-        }
-        if ($this->conf['sidebar_right'] ) {
-            $cfg = [
-                'sidebar' => 'right',
-                'width' => '33%',
-            ];
-            $sidebar_right = $this->getSidebarRight($cfg);
+            $sidebar_left = $this->sidebar->getSidebar($data['sidebar_data']);
+            $res .= $sidebar_left;
         }
         
-        $res .= $sidebar_left;
+//        $res .= $sidebar_left;
 
         $content_main = $this->getContentMain($cfg, $data['content_data']);
         $res .= $content_main;
 
-        
-//        $res .= "\n\n\n\n</div>";
-//        $res .= "\n</main>";
         return $res;
+    }
+   
+    
+    private function getSidebarRight($param, $data) 
+    {
+        
+    }
+    
+    
+    private function getSidebarTwo($param, $data) 
+    {
+        
     }
     
     /**
-     * возвращает html строку с левым сайдбаром
-     * @param Array $param - массив с конфигурацией сайдбара
-     * @param String $catDataStr - UL html строка с категориями товара
+     * возвращает html строку c содержимым тега MAIN
+     * @param type $data - данные для заполнения основного контента
      * @return string
      */
-    private function getSidebarLeft($param, $catDataStr) 
+    private function getContentMain($data) 
     {
-        $res = "\n" . '<aside class="sidebar-left">';
-        $res .= $this->getCategoryLeft($catDataStr);
-        
-        
-        $filterDataStr = "\n<h3>Filters</h3>"
-            . "<div>Filter1 html container</div>"    //Временно!!! Как пример
-
-            . "<div>Filter2  html container</div>"
-            . '';
-        $res .= $this->getFilterLeft($filterDataStr);
-        
-        
-        $articleDataStr = "\n<h3>Articles</h3>"
-                . "\n<div class=\"sb-article\">"                 //Временно!!! Как пример
-                . 'Article 1 content'
-                . "\n</div>"
-                . "\n<div class=\"sb-article\">"
-                . 'Article 2 content'
-                . "\n</div>"
-                .  "\n<div>"
-                . "\n<div class=\"sb-article\">"
-                . 'Article 3 content'
-                . "\n</div>"
-                ;
-
-        $res .= $this->getArticleLeft($articleDataStr);
-        
-        
-        $res .= "\n" . '</aside>';
-        return $res;
-    }
-    
-    /**
-     * возвращает html DIV с содержимым $str 
-     * @param Str $str - строка категорий товара
-     * @return string
-     */
-    public function getCategoryLeft($str)
-    {   
-        $res = "\n";
-        $res .= '<section class=category-wrap>';
-        $res .=  $str;
-        $res .= "\n" . '</section>';
-        return $res;
-    }
-
-
-    public function getFilterLeft($str)
-    {
-        $res = "\n" .'<sectin class=filter-wrap>';
-        $res .=  $str;
-        $res .= "\n" . '</sectin>';
-        return $res;
-    }
-    
-    public function getArticleLeft($str)
-    {
-        $res = "\n" .'<sectin class=article-wrap>';
-        $res .=  $str;
-        $res .= "\n" . '</sectin>';
-        return $res;
-    }
-    
-    
-    private function getSidebarRight($param) 
-    {
-        
-    }
-    
-    
-    private function getSidebarTwo($param) 
-    {
-        
-    }
-    
-    
-    private function getContentMain($param, $data) 
-    {
-//        $res = "\n\n" . '<div class="content-main">';
         $res = "\n\n" . '<main class="main">';
         
-        $res .= "\n" . '<section class="main-header">  <!-- content-header -->';
-        
-        $res .= "\n" . '<div class="content-breadscrumb">';
-        $res .= 'It is » breadscrumb';
-        $res .= "\n</div>";
-        
-        $res .= "\n" . '<h2 id="category_name" class="category-head">&nbsp;</h2>';
-        
-        $res .= "\n" . '<div class="goods-options">';
-        
-        $res .= "\n <span class=\"goods-view\">Show";
-        $res .=  "\n" . '<select id="goods_view">';
-        $res .= '<option value="columns">as columns';
-        $res .= '<option value="list">as list';
-        $res .= "\n" . '</select>';
-        $res .= "\n</span>";
-                                        
-        $res .= "\n <span class=\"goods-limit\">Per page";
-        $res .= "\n" . '<select id="goods_limit">';
-        $res .= '<option value="10">10';
-        $res .= '<option value="20">20';
-        $res .= '<option value="50">50';
-        $res .= '<option value="100">100';
-        $res .= "\n" . '</select>';
-        $res .= "\n</span>";
-        
-        $res .= "\n <span class=\"goods-order\">Order";
-        $res .= "\n" . '<select id="goods_order">';
-        $res .= '<option value="alphabet">Alphabetically';
-        $res .= '<option value="rate">Best rated';
-        $res .= '<option value="price&uarr;">Price &uarr;';
-        $res .= '<option value="price&darr">Price &darr;';
-        $res .= '<option value="newesst">Newest';
-        $res .= "\n" . '</select>';
-        $res .= "\n</span>";
-
-        $res .= "\n</div>"  .  '<!-- .goods-options -->';
-        
-        $res .= "\n</section>"  . '<!-- .main-header -->';
-
-//        $res .= "\n\n" . '<section id = "goods" class="content-main">';
-        $res .= "\n\n" . '<section id = "goods" class="main-content">';
-          $res .= $data;
-        $res .= "\n</section>"  .  '<!-- .goods -->';
+        $res .= $this->contentHeader->getHeader();
+        $res .= $this->contentMain->getContentMain($data);        
         
         $res .= "\n</main>";
         

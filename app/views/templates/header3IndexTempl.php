@@ -6,7 +6,7 @@
  */
 
 $res = "\n" . '<div class="header3">';
-$res .= "\n" . '<ul class="navbar">'
+$res .= "\n" . '<ul id="sb_navbar" class="navbar">'
                 . "\n<li>"
                 . '<a href="#">Item1</a>'
                 . "\n</li>"

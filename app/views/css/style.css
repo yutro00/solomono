@@ -70,6 +70,7 @@ color: yellow;
 .nav-header #readme {
     text-decoration: underline;
     font-weight: bold;
+    color: red;
     cursor: pointer;
 } 
 .nav-header li {
@@ -129,6 +130,10 @@ color: yellow;
 .navbar {
     margin-left: 5%;
 }
+.navbar li a:hover {
+    color: red;
+} 
+
 .header3 li {
     display: table-cell;
     padding: 10px 20px;
@@ -140,7 +145,7 @@ color: yellow;
 } 
 .header3 li:hover {
     color: black;
-    background-color: aqua;
+    /*background-color: aqua;*/
 } 
 .header3 a {
     color: yellow;
