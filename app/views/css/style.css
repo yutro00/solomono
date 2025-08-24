@@ -45,13 +45,21 @@ color: yellow;
 }
 .lang-select, .currency-select {
     float: left;
-    margin-top: 5px;
-    margin-right: 20px;
+    margin: 5px 20px;
+/*    margin-top: 5px;
+    margin-right: 20px;*/
 }
-.phone {
+/*вариант для header1*/
+/*.phone {
     display: inline-block;
     float: left;
-    margin-top: 3px;
+    margin-top: 2px;
+    margin-left: 20px;
+}*/
+/*вариант для header2*/
+.phone {
+    float: right;
+    margin-right: 15px;
 }
 .nav-header {
     float: left;
@@ -101,7 +109,7 @@ color: yellow;
     top: -12px;
     width: 150px;
     height: 32px;
-    margin-left: 80px;
+/*    margin-left: 80px;*/
     padding: 10px 10px;
     border: solid 2px gray;
     border-radius: 5px 5px;

@@ -22,6 +22,11 @@ $res .= "\n" . '<div id="cart" class="cart">'
                 . '<img class="cart-img" src="/app/resources/image/cart48.png">'
                 . '</div>';
 
+$res .= "\n"
+        . '<span class="phone">'
+        . 'Phone: <br>  +38 097 829-79-89'
+        . '</span>';
+
 $res .= "\n</div>";
 
 return $res;
