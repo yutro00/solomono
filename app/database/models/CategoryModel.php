@@ -231,7 +231,8 @@ $lang = 'en';       //ВРЕМЕННО!!!
         $res = "\n";
         $res .= "\n" . '<ul id = "sbleft_category" class="sbleft_category">';
         $res .= "\n";
-        $res .= $this->getLiTag($arr[0], '', 'sbleft-li-selected');
+//        $res .= $this->getLiTag($arr[0], '', 'sbleft-li-selected');
+        $res .= $this->getLiTag($arr[0], '', 'selected');
         for ($i = 1; $i < count($arr); $i++) {
             if (is_null($arr[$i]['sub_cat'])) {
                 $res .= $this->getLiTag($arr[$i]);

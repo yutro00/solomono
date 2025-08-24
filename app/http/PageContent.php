@@ -91,7 +91,7 @@ class PageContent
     /**
      * возвращает html строку с левым сайдбаром
      * @param Array $param - массив с конфигурацией сайдбара
-     * @param String $catData - UL html строка с категориями товара
+     * @param String $catDataStr - UL html строка с категориями товара
      * @return string
      */
     private function getSidebarLeft($param, $catDataStr) 
@@ -154,7 +154,7 @@ $filterDataStr = "\n<div>Filter1 html container</div>"       //Временно!
         $res .= "\n" . '<section class="main-header">  <!-- content-header -->';
         
         $res .= "\n" . '<div class="content-breadscrumb">';
-          $res .= 'It is » breadscrumb';
+        $res .= 'It is » breadscrumb';
         $res .= "\n</div>";
         
         $res .= "\n" . '<h2 id="category_name" class="category-head">&nbsp;</h2>';

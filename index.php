@@ -17,18 +17,17 @@ Config::setConfig();  //загружаем конфигурацию обязат
 //режим отладки
 $debug = Config::getConfig()['app']['debug'];
 if ($debug) {
+    $level = Config::getConfig()['app']['error_level'];
     ini_set('display_startup_errors', 1);
     ini_set('display_errors', 1);
 //    error_reporting(E_ALL);
-    error_reporting(E_ERROR);
+    error_reporting($level);
 }
 
 setDbConnection();      //устанавливаем связь с БД
 
 
-
 $request_uri = $_SERVER['REQUEST_URI'];
-//$request = 
 
 $request = str_replace('/index.php', '', $request_uri);
 
@@ -50,12 +49,10 @@ if (isset($_GET['limit'])) {
     $limit = $_GET['limit'];
 }
 
-$var3 = '';
-//php как парсить http запрос
+//$var3 = '';
+
 
 // определяем маршрут
-//if (array_key_exists($request_uri, $routes)) {
-//    $route = $routes[$request_uri];
 if (array_key_exists($path, $routes)) {
     $route = $routes[$path];
     $controllerName = $route['controller'];

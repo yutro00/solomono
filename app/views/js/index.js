@@ -5,7 +5,7 @@
  */
 
 const domain = 'solomono';
-const sourceClass = 'sbleft-li-selected';     //LI источник нач-го запроса списка товаров
+const sourceClass = 'selected';     //LI источник нач-го запроса списка товаров
 const destination = 'goods';          //место вставки нач. списка товаров
 const categoryNameId = 'category_name';  //ID заголовка категории
 
@@ -18,16 +18,41 @@ document.addEventListener('DOMContentLoaded', function()
 });
 
 /**
- * отображает/скрывает подкатегории в левом сайдбаре
+ * подсвечивает ссылку при клике на ссылку в списке
  * @param {Event} event
  * @returns {undefined}
  */
 function sbCategoryClick(event)
 {
-//    let subcategory = document.querySelector('ul.sbleft_subcategory_ul'); 
-    let subcategory = document.querySelector('#sbleft_category');
+    let elem = event.target;
     
-    subcategory.classList.toggle('hide');
+    let selectedOld = document.querySelector('.selected');
+    if (selectedOld !== null) {
+        selectedOld.classList.remove('selected');
+        elem.classList.add('selected');
+    }
+    
+// надо убрать прежнюю подсветку и установить новую
+// function setNewSelect();
+    
+    if (elem.nodeName === 'A') {
+        setSubcategory(elem.parentElement);
+        
+
+    }
+}
+
+/**
+ * отображает/скрывает подкатегории в сайдбаре
+ * @param {Node} elem - элемент, который может иметь скрытые подкатегории
+ * @returns {undefined}
+ */
+function setSubcategory(elem)
+{
+    let subcat = elem.querySelector('ul');
+    if (subcat !== null) {
+        subcat.classList.toggle('hide');
+    }
 }
 
 /**

@@ -45,13 +45,13 @@ color: yellow;
 }
 .lang-select, .currency-select {
     float: left;
-    margin-top: 4px;
+    margin-top: 5px;
     margin-right: 20px;
 }
 .phone {
     display: inline-block;
     float: left;
-    margin-top: 2px;
+    margin-top: 3px;
 }
 .nav-header {
     float: left;
@@ -61,6 +61,7 @@ color: yellow;
 }
 .nav-header #readme {
     text-decoration: underline;
+    font-weight: bold;
     cursor: pointer;
 } 
 .nav-header li {
@@ -99,7 +100,7 @@ color: yellow;
     position: relative;
     top: -12px;
     width: 150px;
-    height: 30px;
+    height: 32px;
     margin-left: 80px;
     padding: 10px 10px;
     border: solid 2px gray;
@@ -167,11 +168,19 @@ color: yellow;
     font-size: 1.2rem;
     
 }
-.sbleft-li-selected {
+/*.sbleft-li-selected {
     background-color: #f9e442;
     border-radius: 6px;
     padding-left: 10px;
+}*/
+
+.selected {
+    background-color: #f9e442;
+    border-radius: 6px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
+
 .sbleft_category a,
 .sbleft_subcategory {
     text-decoration: none;
@@ -229,6 +238,7 @@ color: yellow;
     background-color:white;
     padding-left: 10px;
     border-radius: 8px 8px;
+    margin: 12px 0;
 }
 .content-options {
     height: 28px;
