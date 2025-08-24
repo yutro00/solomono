@@ -100,11 +100,28 @@ class PageContent
         $res .= $this->getCategoryLeft($catDataStr);
         
         
-$filterDataStr = "\n<div>Filter1 html container</div>"       //Временно!!! Как пример
-        . "<div>Filter2  html contcainer</div>"
-        . '';
-//        . '</div>';
+        $filterDataStr = "\n<h3>Filters</h3>"
+            . "<div>Filter1 html container</div>"    //Временно!!! Как пример
+
+            . "<div>Filter2  html container</div>"
+            . '';
         $res .= $this->getFilterLeft($filterDataStr);
+        
+        
+        $articleDataStr = "\n<h3>Articles</h3>"
+                . "\n<div class=\"sb-article\">"                 //Временно!!! Как пример
+                . 'Article 1 content'
+                . "\n</div>"
+                . "\n<div class=\"sb-article\">"
+                . 'Article 2 content'
+                . "\n</div>"
+                .  "\n<div>"
+                . "\n<div class=\"sb-article\">"
+                . 'Article 3 content'
+                . "\n</div>"
+                ;
+
+        $res .= $this->getArticleLeft($articleDataStr);
         
         
         $res .= "\n" . '</aside>';
@@ -133,6 +150,15 @@ $filterDataStr = "\n<div>Filter1 html container</div>"       //Временно!
         $res .= "\n" . '</sectin>';
         return $res;
     }
+    
+    public function getArticleLeft($str)
+    {
+        $res = "\n" .'<sectin class=article-wrap>';
+        $res .=  $str;
+        $res .= "\n" . '</sectin>';
+        return $res;
+    }
+    
     
     private function getSidebarRight($param) 
     {
