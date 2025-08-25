@@ -8,6 +8,7 @@
 require_once '/var/www/html/solomono/app/database/Database.php';
 require '/var/www/html/solomono/app/http/Page.php';
 require '/var/www/html/solomono/app/database/models/CategoryModel.php';
+//include '/var/www/html/solomono/app/database/models/GoodsModel.php';
 
 
 /**
@@ -31,7 +32,13 @@ class IndexController
         $res .= '<div class="page-wrap">';
                
         $categoryModel = new CategoryModel($connect);
+//$categoryId = $categoryModel->getId();
         $category = $categoryModel->getCategories();
+        
+        
+//        goodsModel() = new GoodsModel($connect);
+        
+//        $goods = goodsModel->getGoodsByCategory($categoryId);
         
 //        это надо реализовать!!!
 //        $currCategory = $categoryModel->getSelectedCategory();
@@ -62,11 +69,12 @@ class IndexController
     
     public function about()
     {
-        echo "It is about responce!!!";
+        echo "It is about response!!!";
     }
     
     public function goodsByCategory()
     {
+        
         echo 'Здесь будет товар выбранной категории!!!';
     }   
 }

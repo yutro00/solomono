@@ -48,12 +48,36 @@ class PageContent
             $sidebarCfg = [];
             $sidebarCfg['sidebar'] = 'left';
             $sidebarCfg['width'] = '33%';
-            $this->sidebar = new Sidebar($sidebarCfg);
+            $this->sidebar = self::createContentObject('sidebar', $sidebarCfg);
         }
-        $this->contentHeader = new ContentHeader();
-        $this->contentMain = new ContentMain();
-        
+        $this->contentHeader = self::createContentObject('content_header');
+        $this->contentMain = self::createContentObject('content_main');
     }
+
+    
+    /**
+     * по входной строке возвращает нужный объект
+     * @param String $key - строка, по которой выбирают, какой объект возвращать
+     * @param Array $param - массив параметров конструктора создаваемого объекта
+     * @return Object
+     */
+    public static function createContentObject($key, $param = null)
+    {
+        $res;
+        switch ($key) {
+            case 'sidebar' :
+                $res = new Sidebar($param);
+                break;
+            case 'content_header' :
+                $res = new ContentHeader();
+                break;
+            case 'content_main' :
+                $res = new ContentMain();
+                break;
+        }
+        return $res;
+    }
+
 
 
     public function getSidebar()

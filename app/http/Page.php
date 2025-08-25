@@ -5,9 +5,6 @@
  * Объект формирования HTML страниц
  */
 
-//namespace app\http;
-//
-//use app\http\APage;
 
 $res = require '/var/www/html/solomono/app/http/APage.php';
 $res1 = include '/var/www/html/solomono/app/http/IPage.php'; 

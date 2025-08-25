@@ -39,6 +39,15 @@ class Body
     }
     
     
+    
+    public static function createPageObject($param)
+    {
+        
+    }
+
+
+
+
     public function getHeader() 
     {
         return $this->header->getHeader();

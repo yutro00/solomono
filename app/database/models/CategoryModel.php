@@ -2,10 +2,10 @@
 
 /*
  * Project Solomono test
- * 
+ * Класс взаимодействия с таблицей Category
  */
 
-require '/var/www/html/solomono/app/database/models/IModel.php';
+require_once '/var/www/html/solomono/app/database/models/IModel.php';
 
 /**
  * Description of CategoryModel
@@ -108,9 +108,14 @@ class CategoryModel implements IModel
     }
     
     
-    private function fetchAll($result) 
+    
+//    public function fetchAll($result)
+    private function fetchAll($result)
     {
         $rows = [];
+//        if (count($rows) === 0) {
+//            return $rows;
+//        }
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }

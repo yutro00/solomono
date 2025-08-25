@@ -55,6 +55,10 @@ class Sidebar
     public function getSidebarLeft($data)
     {
         $res = "\n" . '<aside class="sidebar-left">';
+        
+        $res .=  "\n" . '<h3>Category</h3>';
+        $res .=  "\n" ;
+        
         $res .= $this->getCategoryLeft($data);
         
         $filterDataStr = "\n<h3>Filters</h3>"

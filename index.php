@@ -49,8 +49,6 @@ if (isset($_GET['limit'])) {
     $limit = $_GET['limit'];
 }
 
-//$var3 = '';
-
 
 // определяем маршрут
 if (array_key_exists($path, $routes)) {
