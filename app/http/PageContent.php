@@ -101,8 +101,8 @@ class PageContent
             $cfg = [
                 'sidebar' => 'left',
                 'width' => '33%',
-                'sidebar_data'  => 'It is sidebar data',
-                'content_data'  => 'It is sidebar data'
+//                'sidebar_data'  => 'It is sidebar data',
+//                'content_data'  => 'It is sidebar data'
             ];
             $sidebar_left = $this->sidebar->getSidebar($data['sidebar_data']);
             $res .= $sidebar_left;
@@ -110,7 +110,8 @@ class PageContent
         
 //        $res .= $sidebar_left;
 
-        $content_main = $this->getContentMain($cfg, $data['content_data']);
+//        $content_main = $this->getContentMain($cfg, $data['content_data']);
+        $content_main = $this->getContentMain($data['content_main']);
         $res .= $content_main;
 
         return $res;

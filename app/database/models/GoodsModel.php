@@ -19,9 +19,15 @@ class GoodsModel implements IModel
     private $connection;
     
     private $sql = [
-        
+        'goods_default' => 'Select * FROM goods WHERE category_id = 1 LIMIT 20',
+//        'goods' => 'Select * FROM goods WHERE id = :catId LIMIT :limit',
+        'goods_byalphabet' => 'Select * from goods LIMIT 10',
+        'goods_byrating' => '',
+        'goods_bypriceinc' => '',
+        'goods_bypricedec' => '',
+        'goods_bynew' => '',
     ];
-
+//OFFSET · DISTINCT 
 
     public function __construct($conn)
     {
@@ -46,7 +52,13 @@ class GoodsModel implements IModel
     
     public function read($sql) 
     {
-        
+        $res;
+            $result = $this->connection->query($sql);
+        if ($result === false) {
+            die("Query failed: " . $this->connection->error);
+        }
+        $res = $this->fetchAll($result);
+        return $res;
     }
     
     
@@ -61,23 +73,77 @@ class GoodsModel implements IModel
     }
     
     
-    public function getSql($str) 
+    public function getSql($str, $params = null)
     {
-        
+        $res;
+        if (is_null($params)) {
+            $res = $this->sql[$str];
+        } else {
+            $res = $this->getSqlWithParam();
+        }
+        return $res;
     }
     
     
+    private function sqlWithParam($sqlStr, $params)
+    {
+        
+    }
+
+
+
+
     public function fetchAll($result)
     {
+        $rows = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+        }
+        return $rows;
         
     }
     
     
     
-    public function getGoodsByCategory($catId)
+    public function getGoodsByCategoryDefaultArr($catId)
     {
-        
+        $sql = $this->getSql('goods_default');
+        $res = $this->read($sql);
+        return $res;
     }
     
+    
+    public function getGoodsByCategoryStr($arr)
+    {
+        if ($arr[$i]['currency'] === 'us') {
+            $currency = '$';
+        } else {
+           $currency = '';
+        }
+
+        
+        for ($i = 0; $i < count($arr); $i++) {
+            $id = $arr[$i]['id'];
+            $name = $arr[$i]['name'];
+            $price = $arr[$i]['price'];
+            if ($arr[$i]['currency'] === 'us') {
+                $currency = '$';
+            } else {
+                $currency = '';
+            }
+            $count = $arr[$i]['count'];
+            $description = $arr[$i]['description'];
+            
+            $productCard[$i] = include '/var/www/html/solomono/app/views/templates/productCardTempl.php';
+        }
+        $res = '';
+        for ($i = 0; $i < count($productCard); $i++) {
+            $res .= $productCard[$i];
+        }
+        return $res;
+        
+    }
     
 }

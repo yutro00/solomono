@@ -56,7 +56,7 @@ class Sidebar
     {
         $res = "\n" . '<aside class="sidebar-left">';
         
-        $res .=  "\n" . '<h3>Category</h3>';
+        $res .=  "\n" . '<h3>Categories</h3>';
         $res .=  "\n" ;
         
         $res .= $this->getCategoryLeft($data);

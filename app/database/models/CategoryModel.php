@@ -47,8 +47,6 @@ class CategoryModel implements IModel
     
     
 
-
-
     public function __construct($conn)
     {
         $this->connection = $conn; 
@@ -86,6 +84,9 @@ class CategoryModel implements IModel
         return $res;
     }
     
+    
+
+    
     public function update($sql) 
     {
         
@@ -109,25 +110,29 @@ class CategoryModel implements IModel
     
     
     
-//    public function fetchAll($result)
     private function fetchAll($result)
     {
         $rows = [];
-//        if (count($rows) === 0) {
-//            return $rows;
-//        }
-        while ($row = $result->fetch_assoc()) {
-            $rows[] = $row;
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
         }
         return $rows;
     }
     
     
-    public function getCategories()
+    public function getCategoriesArr()
     {
         $catArr = $this->readCategories();
         $subcatArr = $this->readSubcategories();
         $arr = $this->assembleCategories($catArr, $subcatArr);
+        return $arr;
+    }
+    
+    public function getCategoriesStr($arr)
+    {
+//        $arr = $this->getCategoriesArr();
         $res = $this->getUlTag($arr);
         return $res;
     }
@@ -136,7 +141,7 @@ class CategoryModel implements IModel
      * возвращает массив записей действующих категорий
      * @return Array
      */
-    public function readCategories() 
+    public function readCategories()
     {
         $sql = $this->getSql('read_cat');
         $arr = $this->read($sql);
@@ -329,5 +334,14 @@ $res .= $subCat;
             $this->fieldsList[$i] = $res[$i]['COLUMN_NAME'];
         }
     }
+    
+    
+//    public function getId()
+//    {
+//        $res = 1;
+//        
+//        return $res;
+//        
+//    }
     
 }

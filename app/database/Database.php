@@ -18,32 +18,29 @@ class Database
     
     public static function setConnection($params)
     {
-        try {
-            self::$connection = new mysqli(
+        $conn = new mysqli(
                 $params['host'], 
                 $params['user'], 
                 $params['psw'], 
                 $params['dbname']);
-        } catch (Exception $exc) {
+        
+        if ($conn  == false) {
+            //write to log  mysqli_connect_error()
             self::$connection = null;
-        echo '<div>'
+            echo '<div>'
             . '<b>Oшибка при соединении с БД.</b><br>'
             . 'Проверьте наличие БД и параметры подключения в файле config.ini. '
             . 'При отсутствии БД запустите скрипт db.sql из папки app/backup.'
             . ' <br>Читайте readme.'
             . '<br></div>';
-            echo $exc->getTraceAsString();
+        } else {
+            self::$connection = $conn;
+            
+            if (!$conn->set_charset($params['charset'])) { // или "utf8mb4" для лучшей поддержки
+//                 write to log sprintf("Ошибка при установке кодировки: %s\n", $conn->error);
+//                exit();
+            }
         }
-    }
-    
-    
-    public function __construct($params)
-    {
-        $this->connection = new mysqli(
-                $params['host'], 
-                $params['user'], 
-                $params['psw'], 
-                $params['dbname']);
     }
 
     

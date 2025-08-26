@@ -81,6 +81,7 @@ function getDbParams()
     $dbParams['user'] = Config::getConfig()['database']['user'];
     $dbParams['psw'] = Config::getConfig()['database']['password'];
     $dbParams['dbname'] = Config::getConfig()['database']['dbname'];
+    $dbParams['charset'] = Config::getConfig()['app']['charset'];
     return $dbParams;
 }
 

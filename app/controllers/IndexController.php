@@ -8,7 +8,7 @@
 require_once '/var/www/html/solomono/app/database/Database.php';
 require '/var/www/html/solomono/app/http/Page.php';
 require '/var/www/html/solomono/app/database/models/CategoryModel.php';
-//include '/var/www/html/solomono/app/database/models/GoodsModel.php';
+require '/var/www/html/solomono/app/database/models/GoodsModel.php';
 
 
 /**
@@ -25,20 +25,22 @@ class IndexController
     public function index() 
     {
         $connect = Database::getConnection();
+        //извлекаем данные по категориям
+        $categoryModel = new CategoryModel($connect);
+        $catArr = $categoryModel->getCategoriesArr();
+        $firstCategoryId = $catArr[0]['id'];
+        $category = $categoryModel->getCategoriesStr($catArr);
+        
+        //извлекаем данные по умолчанию на товары из категории
+        $goodsModel = new GoodsModel($connect);
+        $goodsArr = $goodsModel->getGoodsByCategoryDefaultArr($firstCategoryId);
+        $goodsByCategory = $goodsModel->getGoodsByCategoryStr($goodsArr);
+        
         
         $page = new Page('guest');
         
         $res = $page->getPageBeginning();
         $res .= '<div class="page-wrap">';
-               
-        $categoryModel = new CategoryModel($connect);
-//$categoryId = $categoryModel->getId();
-        $category = $categoryModel->getCategories();
-        
-        
-//        goodsModel() = new GoodsModel($connect);
-        
-//        $goods = goodsModel->getGoodsByCategory($categoryId);
         
 //        это надо реализовать!!!
 //        $currCategory = $categoryModel->getSelectedCategory();
@@ -47,7 +49,9 @@ class IndexController
         
         
         $bodyData = [
-            'content_data' => 'Please wait ... Goods are on the way',
+//            'content_data' => 'Please wait ... Goods are on the way',
+            'content_data' => $goodsByCategory,
+            'content_main' => $goodsByCategory,
             'sidebar_data' => $category,
         ];
 
@@ -72,10 +76,13 @@ class IndexController
         echo "It is about response!!!";
     }
     
-    public function goodsByCategory()
+    public function getGoodsByCategory()
     {
-        
-        echo 'Здесь будет товар выбранной категории!!!';
+        $catId = $_GET['cat'];
+        $id = substr($catId,4);
+//        $limit = $_GET['limit'];
+//        $order = $_GET['order'];
+        echo 'Здесь будет товар категории c ID = ' . $id;
     }   
 }
 

@@ -20,7 +20,8 @@ $res .= "\n" . '<form name="search" action="/" method="get" class="form-search">
         
 $res .= "\n" . '<div id="cart" class="cart">'
                 . '<img class="cart-img" src="/app/resources/image/cart48.png">'
-                . '</div>';
+//                . "\n <span>Empty</span>"
+                . "\n</div>";
 
 $res .= "\n"
         . '<span class="phone">'

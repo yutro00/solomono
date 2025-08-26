@@ -97,9 +97,9 @@ class ContentHeader
         $res .= "\n <span class=\"goods-order\">Order";
         $res .= "\n" . '<select id="goods_order">';
         $res .= '<option value="alphabet">Alphabet';
-        $res .= '<option value="rate">Best rated';
-        $res .= '<option value="price&uarr;">Price &uarr;';
-        $res .= '<option value="price&darr">Price &darr;';
+        $res .= '<option value="rating">Rating';
+        $res .= '<option value="priceinc;">Price &uarr;';
+        $res .= '<option value="pricedec">Price &darr;';
         $res .= '<option value="newesst">Newest';
         $res .= "\n" . '</select>';
         $res .= "\n</span>";
