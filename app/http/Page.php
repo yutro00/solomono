@@ -10,6 +10,7 @@ $res = require '/var/www/html/solomono/app/http/APage.php';
 $res1 = include '/var/www/html/solomono/app/http/IPage.php'; 
 $res2 = require '/var/www/html/solomono/app/http/PageHead.php';
 $res = require '/var/www/html/solomono/app/http/Body.php';
+//require '/var/www/html/solomono/app/http/PageAddition.php';
 //$res3 = require '/var/www/html/solomono/app/http/PageFooter.php';
 
 /**
@@ -196,6 +197,14 @@ class Page extends APage implements IPage
         } else {
             $res = true;
         }
+        return $res;
+    }
+    
+    
+    
+    public function getAddition()
+    {
+            $res = $res = $this->bodyObj->getAddition();
         return $res;
     }
 

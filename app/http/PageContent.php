@@ -101,8 +101,6 @@ class PageContent
             $cfg = [
                 'sidebar' => 'left',
                 'width' => '33%',
-//                'sidebar_data'  => 'It is sidebar data',
-//                'content_data'  => 'It is sidebar data'
             ];
             $sidebar_left = $this->sidebar->getSidebar($data['sidebar_data']);
             $res .= $sidebar_left;

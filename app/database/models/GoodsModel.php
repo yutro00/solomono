@@ -20,12 +20,13 @@ class GoodsModel implements IModel
     
     private $sql = [
         'goods_default' => 'Select * FROM goods WHERE category_id = 1 LIMIT 20',
-//        'goods' => 'Select * FROM goods WHERE id = :catId LIMIT :limit',
-        'goods_byalphabet' => 'Select * from goods LIMIT 10',
-        'goods_byrating' => '',
-        'goods_bypriceinc' => '',
-        'goods_bypricedec' => '',
-        'goods_bynew' => '',
+        'goods' => 'Select * FROM goods WHERE category_id = %s order by %s LIMIT %s',
+        
+        'goods_alphabet' => 'Select * FROM goods WHERE category_id = 4 LIMIT 20',
+        'goods_rating' => 'Select * FROM goods WHERE category_id = 4 LIMIT 20',
+        'goods_priceinc' => '',
+        'goods_pricedec' => '',
+        'goods_newest' => '',
     ];
 //OFFSET · DISTINCT 
 
@@ -54,6 +55,7 @@ class GoodsModel implements IModel
     {
         $res;
             $result = $this->connection->query($sql);
+        
         if ($result === false) {
             die("Query failed: " . $this->connection->error);
         }
@@ -117,13 +119,16 @@ class GoodsModel implements IModel
     
     public function getGoodsByCategoryStr($arr)
     {
+        $res = '';
+        if (count($arr) === 0 ) {
+            return $arr;
+        }
         if ($arr[$i]['currency'] === 'us') {
             $currency = '$';
         } else {
            $currency = '';
         }
 
-        
         for ($i = 0; $i < count($arr); $i++) {
             $id = $arr[$i]['id'];
             $name = $arr[$i]['name'];
@@ -138,12 +143,28 @@ class GoodsModel implements IModel
             
             $productCard[$i] = include '/var/www/html/solomono/app/views/templates/productCardTempl.php';
         }
-        $res = '';
-        for ($i = 0; $i < count($productCard); $i++) {
-            $res .= $productCard[$i];
+//        $res = '';
+        if (count($productCard) > 0) {
+            for ($i = 0; $i < count($productCard); $i++) {
+                $res .= $productCard[$i];
+            }
         }
         return $res;
+    }
+    
+    
+    public function getGoodsByCategoryArr($param)
+    {
         
+        
+        
+        $str = $this->getSql('goods');
+        
+        $sql = sprintf($str, $param['cat'], $param['order'], $param['limit']);
+        $res = $this->read($sql);
+        
+        
+        return $res;
     }
     
 }

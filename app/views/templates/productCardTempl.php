@@ -7,7 +7,7 @@
 
 
 $res =
-"\n<div class=\"product\">"
+"\n<div id=\"prod_{$id}\" class=\"product\">"
         . "\n<span class=\"img\">"
         . 'productImage'
         . "\n</span>"
@@ -18,10 +18,12 @@ $res =
         . "\n</span>"
         
         . "\n<span class=\"bt-buy\">"
-        . '<input type="button" value="Buy">'
+//        . '<input type="button" value="Buy">'
+        . "<input type=\"button\" data-product-id=\"prod_{$id}\" value=\"Buy\">"
         . "</span>"
         
-        . "\n<span id=\"prod_{$id}\" class=\"product-name\">"
+//        . "\n<span id=\"prod_{$id}\" class=\"product-name\">""
+        . "\n<span class=\"product-name\">"
         . "\n {$name}"
         . "\n</span>"
         

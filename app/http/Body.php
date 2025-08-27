@@ -8,6 +8,7 @@
 $res = require '/var/www/html/solomono/app/http/PageHeader.php';
 $res1 = require '/var/www/html/solomono/app/http/PageContent.php';
 $res2 = require '/var/www/html/solomono/app/http/PageFooter.php';
+$res3 = include '/var/www/html/solomono/app/http/PageAddition.php';
 
 
 /**
@@ -26,7 +27,7 @@ class Body
     
     private $footer;
 
-
+    private $addition;
 
 
     public function __construct($cfg) 
@@ -35,6 +36,12 @@ class Body
         $this->header = new PageHeader($cfg);
         $this->content = new PageContent();
         $this->footer = new PageFooter();
+        $this->addition = new PageAddition();
+        
+//        if ($res3 === 1) {
+//            $this->$addition = new PageAddition();
+//        }
+        
         
     }
     
@@ -62,6 +69,16 @@ class Body
     public function getFooter() 
     {
         return $this->footer->getFooter();
+    }
+    
+    
+    
+    public function getAddition() 
+    {
+        if (isset($this->addition)) {
+            $res = $this->addition->getAddition();
+        }
+        return $res;
     }
     
 }

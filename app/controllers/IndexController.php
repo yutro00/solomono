@@ -49,7 +49,6 @@ class IndexController
         
         
         $bodyData = [
-//            'content_data' => 'Please wait ... Goods are on the way',
             'content_data' => $goodsByCategory,
             'content_main' => $goodsByCategory,
             'sidebar_data' => $category,
@@ -62,6 +61,8 @@ class IndexController
        
         $footer = $page->getFooter();
         $res .= $footer;
+        $addition = $page->getAddition();
+        $res .= $addition;
 
         $res .= "\n</body>";
         $res .= '</html>';       
@@ -78,11 +79,38 @@ class IndexController
     
     public function getGoodsByCategory()
     {
-        $catId = $_GET['cat'];
-        $id = substr($catId,4);
-//        $limit = $_GET['limit'];
-//        $order = $_GET['order'];
-        echo 'Здесь будет товар категории c ID = ' . $id;
-    }   
+        $goodsConfig = [];
+        $goodsConfig['cat'] = $_GET['cat'];
+        $goodsConfig['limit'] = $_GET['limit'];
+        $goodsConfig['lang'] = $_GET['lang'];
+        switch ($_GET['order']) {
+            case 'name':
+                $goodsConfig['order'] = 'name';
+                break;
+            case 'rating':
+                $goodsConfig['order'] = 'name';
+                break;
+            case 'priceinc':
+                $goodsConfig['order'] = 'price ASC';
+                break;
+            case 'pricedec':
+                $goodsConfig['order'] = 'price DESC';
+                break;
+            default:
+                $goodsConfig['order'] = 'name';
+                break;
+        }
+        
+        $connect = Database::getConnection();
+        $goodsModel = new GoodsModel($connect);
+        $goodsArr = $goodsModel->getGoodsByCategoryArr($goodsConfig);
+        if (count($goodsArr) > 0) {
+            $goodsByCategory = $goodsModel->getGoodsByCategoryStr($goodsArr);
+        } else {
+            $goodsByCategory = "This category is empty\n";
+        }
+        echo $goodsByCategory;
+    }
 }
+
 
