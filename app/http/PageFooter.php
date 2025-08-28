@@ -63,7 +63,8 @@ class PageFooter
                 $script_link .= "<script src=\"/app/views/js/$arr[$i]\"></script>\n";
             }
         }
-        $res .= include '/var/www/html/solomono/app/views/templates/footerIndexTempl.php';
+//        $res .= include '/var/www/html/solomono/app/views/templates/footerIndexTempl.php';
+        $res .= include './app/views/templates/footerIndexTempl.php';
 
         return $res;
     }

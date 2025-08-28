@@ -5,13 +5,10 @@
  * Объект формирования HTML страниц
  */
 
-
-$res = require '/var/www/html/solomono/app/http/APage.php';
-$res1 = include '/var/www/html/solomono/app/http/IPage.php'; 
-$res2 = require '/var/www/html/solomono/app/http/PageHead.php';
-$res = require '/var/www/html/solomono/app/http/Body.php';
-//require '/var/www/html/solomono/app/http/PageAddition.php';
-//$res3 = require '/var/www/html/solomono/app/http/PageFooter.php';
+require './app/http/APage.php';
+include './app/http/IPage.php'; 
+require './app/http/PageHead.php';
+require './app/http/Body.php';
 
 /**
  * Формирует данные для представления http страницы
@@ -51,12 +48,6 @@ class Page extends APage implements IPage
         $this->conf = $this->confDefault;
         $this->iniPage();
     }
-    
-    
-//    static public function getUserRoles() 
-//    {
-//        return self::$userRoles;
-//    }
     
     
     public function iniPage() 
@@ -137,7 +128,7 @@ class Page extends APage implements IPage
     }
     
     
-    public function getBodyObj($obj = null)
+    public function getBodyObj()
     {
         return $this->bodyObj;
     }

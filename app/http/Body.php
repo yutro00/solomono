@@ -5,10 +5,10 @@
  * Объект формирования тега body HTML страницы
  */
 
-$res = require '/var/www/html/solomono/app/http/PageHeader.php';
-$res1 = require '/var/www/html/solomono/app/http/PageContent.php';
-$res2 = require '/var/www/html/solomono/app/http/PageFooter.php';
-$res3 = include '/var/www/html/solomono/app/http/PageAddition.php';
+require './app/http/PageHeader.php';
+require './app/http/PageContent.php';
+require './app/http/PageFooter.php';
+include './app/http/PageAddition.php';
 
 
 /**
@@ -37,12 +37,6 @@ class Body
         $this->content = new PageContent();
         $this->footer = new PageFooter();
         $this->addition = new PageAddition();
-        
-//        if ($res3 === 1) {
-//            $this->$addition = new PageAddition();
-//        }
-        
-        
     }
     
     
@@ -52,9 +46,7 @@ class Body
         
     }
 
-
-
-
+    
     public function getHeader() 
     {
         return $this->header->getHeader();
@@ -65,6 +57,7 @@ class Body
     {
         return $this->content->getContent($arr);
     }
+
     
     public function getFooter() 
     {

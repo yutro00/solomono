@@ -11,10 +11,8 @@
  * @author yuriy
  */
 interface IModel 
-{
-    
+{   
 //    public function getSql($str);
-//    
 //    public function fetchAll($result);
     
     public function create($arr);

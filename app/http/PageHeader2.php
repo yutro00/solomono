@@ -14,7 +14,7 @@ class PageHeader2
 {
     public function getHeader()
     {   
-        $res = include '/var/www/html/solomono/app/views/templates/header2IndexTempl.php';  
+        $res = include './app/views/templates/header2IndexTempl.php';  
         return $res;
     }
 }

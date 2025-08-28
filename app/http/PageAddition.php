@@ -34,7 +34,7 @@ class PageAddition
     
     public function getLayout()
     {
-        $res = include '/var/www/html/solomono/app/views/templates/additionLayoutTempl.php';
+        $res = include './app/views/templates/additionLayoutTempl.php';
         return $res;
     }
     

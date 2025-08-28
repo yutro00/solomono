@@ -16,7 +16,7 @@ $res = '<div class="header1">'
         . "\n" . '<option value="es">Español</option>'
         . "\n" . '/<select>'
         . "\n"
-        . '<select class="currency-select">'
+        . '<select id="currency_select"" class="currency-select">'
         . "\n" . '<option value="en" selected>US</option>'
         . "\n" . '<option value="ua">UAH</option>'
         . "\n" . '<option value="eur">EUR</option>'

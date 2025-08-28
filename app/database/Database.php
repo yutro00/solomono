@@ -37,8 +37,7 @@ class Database
             self::$connection = $conn;
             
             if (!$conn->set_charset($params['charset'])) { // или "utf8mb4" для лучшей поддержки
-//                 write to log sprintf("Ошибка при установке кодировки: %s\n", $conn->error);
-//                exit();
+
             }
         }
     }

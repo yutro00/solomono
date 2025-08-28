@@ -296,10 +296,13 @@ color: yellow;
     float: left;
     width: 32%;
     min-height: 300px;
+    max-height: 300px;
+    margin-top: 10px;
     margin-left: 1%;
     margin-bottom: 10px;
     border: solid 1px #f5f5f5;
     border-radius: 5px;
+    overflow: hidden;
 }
 .product .img {
     display: inline-block;
@@ -318,6 +321,10 @@ color: yellow;
     display: inline-block;
     float: right;
     padding: 5px 5px;
+    cursor: pointer;
+}
+.product .bt-buy:hover {
+    cursor: pointer;
 }
 .product .bt-buy input {
     padding: 4px 5px;
@@ -326,7 +333,6 @@ color: yellow;
     background-color: #f9e442;
     border-radius: 5px;
 }
-
 .product .product-name {
     display: block;
     width: 90%;
@@ -337,6 +343,12 @@ color: yellow;
 .product .product-descr {
     overflow: hidden;
 }
+/*.product input[type='integer'] {
+    width: 30px;
+}*/
+
+
+
 
 .footer {
     float: left;
@@ -363,33 +375,65 @@ color: yellow;
 
 
 /*for modal window*/
-/*.modal-window {*/
 .product-modal {
 position: absolute;
   width: 220px;
   height: 200px;
-  top: calc(40%);
+  top: calc(50%);
   left: calc(40%);
-  border-radius: 10px;
-  box-shadow: 10px 5px 5px grey;
-  background-color: rgb(205, 223, 243);
-  /*background-color: #f5f5f5;*/
+  border-radius: 8px;
+  box-shadow: 10px 8px 5px grey;
+  /*background-color: rgb(205, 223, 243);
+  background-color: #f5f5f5;*/
+  background-color: #d1d3d9;
   cursor: default;
   padding: 10px 20px;   
 }
 .modal-close {
 position: absolute;
-  right: 8px;
-  top: 0px;
+  right: 3px;
+  top: 2px;
   width: 10px;
-  color: red;
-  font-size: larger;
+  color: black;
+  padding: 0px 5px 2px 4px;
   font-weight: bold;
   cursor: pointer;
+  border: solid 1px gray;
+  border-radius: 4px 4px;
+  background-color: #f9e442;
+  padding: 0px 4px;
 }
 .modal-content {
   padding: 0 0;  
 }
 .modal-content h4 {
-    
+  width: 110px;
+  margin: auto auto;
+}
+.modal-product-name {   /*not used*/
+  width: 80%;
+  margin: auto auto;
+}
+.modal-content ul {
+  padding: 0 5px;
+  list-style-type: none;
+}
+
+
+.modal-button {
+    display: block;
+    width: 85px;
+    padding: 5px 5px;
+    margin: 8px auto;
+    background-color: #f9e442;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.modal-count p label {
+  width: 30%;    
+}
+.modal-count {
+  width: 30%;
+  margin-left: 10px;
+  border-radius: 4px 4px;
 }

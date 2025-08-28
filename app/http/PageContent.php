@@ -5,9 +5,9 @@
  * Объект формирования содержимого тега body HTML страницы
  */
 
-require '/var/www/html/solomono/app/http/Sidebar.php';
-require '/var/www/html/solomono/app/http/ContentHeader.php';
-require '/var/www/html/solomono/app/http/ContentMain.php';
+require './app/http/Sidebar.php';
+require './app/http/ContentHeader.php';
+require './app/http/ContentMain.php';
 
 
 /**

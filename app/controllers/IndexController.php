@@ -5,10 +5,15 @@
  * Контроллер начальной страницы
  */
 
-require_once '/var/www/html/solomono/app/database/Database.php';
-require '/var/www/html/solomono/app/http/Page.php';
-require '/var/www/html/solomono/app/database/models/CategoryModel.php';
-require '/var/www/html/solomono/app/database/models/GoodsModel.php';
+//require_once '/var/www/html/solomono/app/database/Database.php';
+//require '/var/www/html/solomono/app/http/Page.php';
+//require '/var/www/html/solomono/app/database/models/CategoryModel.php';
+//require '/var/www/html/solomono/app/database/models/GoodsModel.php';
+
+require_once './app/database/Database.php';
+require_once './app/http/Page.php';
+require_once './app/database/models/CategoryModel.php';
+require_once './app/database/models/GoodsModel.php';
 
 
 /**
@@ -19,7 +24,7 @@ require '/var/www/html/solomono/app/database/models/GoodsModel.php';
 class IndexController 
 {
     /**
-     * отдаёт клиенту начальную страницу
+     * отдаёт клиенту http страницу
      * @return type
      */
     public function index() 

@@ -43,9 +43,6 @@ class Sidebar
             $res .= $this->getSidebarRight($data);
         }
         if ($this->conf['sidebar_left'] && $this->conf['sidebar_right'] ) {
-//            $cfg = [
-//                
-//            ];
             $res .= $this->getSidebarTwo($data);
         }
         return $res;

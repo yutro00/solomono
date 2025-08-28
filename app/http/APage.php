@@ -5,7 +5,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
  */
 
-//namespace app\http;
 
 /**
  * Description of APage

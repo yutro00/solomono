@@ -5,7 +5,7 @@
  * Объект формирования заголовка документа
  */
 
-include '/var/www/html/solomono/app/views/templates/headIndexTempl.php';
+include './app/views/templates/headIndexTempl.php';
 
 /**
  * Description of PageHead

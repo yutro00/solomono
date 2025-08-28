@@ -5,7 +5,7 @@
  * Класс взаимодействия с таблицей Category
  */
 
-require_once '/var/www/html/solomono/app/database/models/IModel.php';
+require_once './app/database/models/IModel.php';
 
 /**
  * Description of CategoryModel

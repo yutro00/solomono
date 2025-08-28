@@ -5,9 +5,9 @@
  * Объект формирования шапки контента страницы
  */
 
-$res = require '/var/www/html/solomono/app/http/PageHeader1.php';
-$res1 = require '/var/www/html/solomono/app/http/PageHeader2.php';
-$res2 = require '/var/www/html/solomono/app/http/PageHeader3.php';
+require_once './app/http/PageHeader1.php';
+require_once './app/http/PageHeader2.php';
+require_once './app/http/PageHeader3.php';
 
 /**
  * Description of JPageHeader

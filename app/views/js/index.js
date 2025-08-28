@@ -16,10 +16,10 @@ const modal_window_id = 'product-modal';
 document.addEventListener('DOMContentLoaded', function() 
 {
     setCategoryName(sourceClass, categoryNameId);
-//    getGoodsByCategory(sourceClass, destination);     //см. прим. к реализации ф-ции
-    
+
     
     document.getElementById('lang_select').addEventListener('change', langClick);
+    document.getElementById('currency_select').addEventListener('change', CurrencyClick);
     document.getElementById('readme').addEventListener('click', readmeClick);
     document.getElementById('sbleft_category').addEventListener('click', sbCategoryClick);
     document.getElementById('sbleft_category').addEventListener('click', getGoodsAjax);
@@ -38,12 +38,30 @@ function langClick(event)
 }
 
 
+function CurrencyClick(event)
+{
+    let elem = event.target;
+    let value = getOptionValue(elem);
+    if (value !== 'en') {
+        alert('Извините, пересчет стоимости на другую валюту пока не производится');
+        elem.value = 'en';
+    }
+}
+
+
 function readmeClick(event)
 {
-    let readme = "Замечания к проекту.\n Не реализовано: \n";
-    readme += '  локализация; \n  верхнее меню; \n  поиск; \n  изменение валюты; \n  упрощен footer страницы;';
+    let readme = "Замечания к проекту. \n\
+        Этот тестовый проект создан на чистых PHP и Javascript, никакие библиотеки не были использованы.\n\
+        \n\Поскольку это тестовое задание и конкретные детали не оговаривались, в проекте не были реализованы: \n";
+    readme += '  локализация; \n  горизонтальное меню; \n  поиск; \n  изменение языка интерфейса и валюты; \n\
+  строка breadscrumb; \n пагинация; \n  упрощен footer страницы; \n\
+  т.к. предполагается вакансия PHP developer, над версткой тоже не слишком заморачивался.';
+    readme += '\n\
+              Тем не менее надеюсь созданное позволит оценить уровень претендента.';
+    
     alert(readme);
-    let setDb = prompt('Запустить скрипт установки БД?', 'Yes');
+//    let setDb = prompt('Запустить скрипт установки БД?', 'Yes');
 }
 
 
@@ -172,56 +190,55 @@ function showProductModal(event)
     if (elem.tagName === 'INPUT' && elem.value === "Buy") {
         productId = elem.dataset.productId;
         product = document.getElementById(productId);
-        showModal(modal_window_id, product);
-        
-//        alert(product.tagName);
+        let productProperties = getProductProperties(product);
+        showModal(modal_window_id, productProperties);
+
     }
 }
 
 /**
+ * возвращает объект со свойствами товара
+ * @param {Object} card - контейнер свойств товара
+ * @returns {Object}
+ */
+function getProductProperties(card)
+{
+    let obj = {};
+    obj.id = card.id.substr(5);
+//    obj.image ???
+    obj.name = card.querySelector('.product-name').innerText;
+    obj.price = card.querySelector('.product-price').innerText;
+    obj.descr = card.querySelector('.product-descr').innerText;
+    
+    return obj;
+}
+
+/**
  * отображает модальное окно с товаром
- * @param {type} obj
+ * @param {String} id - ID модального окна
+ * @param {type} obj - oбъект с характеристиками товара
  * @returns {undefined}
  */
 function showModal(id, obj)
 {
     document.getElementById(id).classList.remove('hide');
-/*
-<div class="product-modal">
-    <div class="modalClose" onclick="close_modal()">
-            X
-    </div>
-    <div id="sub-theme-menu" class="modal-content">
-            <h4>Действие с выбранной темой</h4>
-            <ul>
-                <li>
-                        Добавить
-                </li>
-                <li>
-                        Переименовать
-                </li>
-                <li>
-                        Удалить
-                </li>
-                <li>
-                        Другое
-                </li>
-            </ul>
-            <p>
-                <input type="button" value="To backet" onclick="toBacket();">
-                <input type="button" value="Cancel" onclick="close_modal();">
-            </p>
-    </div>
-</div>
-*/
-
 }
 
 
-function close_modal() {
-    document.getElementById(modal_window_id).style.display = 'none';
+function hide_modal()
+{
+    document.getElementById(modal_window_id).classList.add('hide');
 }
 
+/**
+ * отправляет продукт в корзинку
+ * @returns {undefined}
+ */
+function toBacket()
+{
+    // отправка в корзину
+    hide_modal();
+}
 
 /**
  * возвращает выбранную величину тега Select 

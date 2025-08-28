@@ -5,8 +5,8 @@
  * точка входа на сайт 
  */
 
-require_once '/var/www/html/solomono/app/config/Config.php';
-require_once '/var/www/html/solomono/app/database/Database.php';
+require_once './app/config/Config.php';
+require_once './app/database/Database.php';
 //подключаем маршруты и данные
 require_once 'routes.php';
 require_once 'constants.php';
