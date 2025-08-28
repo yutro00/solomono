@@ -25,7 +25,7 @@ $res = '<div class="header1">'
 //        . '<span class="phone">Phone:   +38 097 829-79-89'
 //        . '</span>'
 //        . "\n"
-    . '<ul class="nav-header">
+    . '<ul id="nav-header" class="nav-header">
         <li id="readme" title="some comments to project">README!</li>
         <li><a href="/">Home</a></li>
         <li><a href="brands">Brands</a></li>

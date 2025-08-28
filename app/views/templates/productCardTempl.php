@@ -18,7 +18,6 @@ $res =
         . "\n</span>"
         
         . "\n<span class=\"bt-buy\">"
-//        . '<input type="button" value="Buy">'
         . "<input type=\"button\" data-product-id=\"prod_{$id}\" value=\"Buy\">"
         . "</span>"
         

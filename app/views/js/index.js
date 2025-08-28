@@ -21,9 +21,11 @@ document.addEventListener('DOMContentLoaded', function()
     document.getElementById('lang_select').addEventListener('change', langClick);
     document.getElementById('currency_select').addEventListener('change', CurrencyClick);
     document.getElementById('readme').addEventListener('click', readmeClick);
+    document.getElementById('nav-header').addEventListener('click', menuClick);
     document.getElementById('sbleft_category').addEventListener('click', sbCategoryClick);
     document.getElementById('sbleft_category').addEventListener('click', getGoodsAjax);
     document.getElementById('goods').addEventListener('click', showProductModal);
+
 });
 
 
@@ -64,6 +66,16 @@ function readmeClick(event)
 //    let setDb = prompt('Запустить скрипт установки БД?', 'Yes');
 }
 
+
+function menuClick(event)
+{
+    let elem = event.target;
+    
+    if (elem.tagName === 'A') {
+        preventDefault();   // не работает!!!
+    }
+    return false;
+}
 
 /**
  * обработчик клика на категории сайдбара:
@@ -209,7 +221,8 @@ function getProductProperties(card)
     obj.name = card.querySelector('.product-name').innerText;
     obj.price = card.querySelector('.product-price').innerText;
     obj.descr = card.querySelector('.product-descr').innerText;
-    
+    obj.descr = card.querySelector('.product-descr').textContent;
+    obj.descr = card.querySelector('.product-descr').innerHTML;
     return obj;
 }
 
@@ -221,13 +234,44 @@ function getProductProperties(card)
  */
 function showModal(id, obj)
 {
-    document.getElementById(id).classList.remove('hide');
+    let modal = document.getElementById(id);
+    modal.querySelector('#modal_price').textContent = obj.price;
+    modal.querySelector('#modal_name').textContent = obj.name;
+    if (obj.descr === '' || obj.descr === undefined) {
+        modal.querySelector('#modal_descr').textContent = 'Additional data is absent';
+    } else {
+        modal.querySelector('#modal_descr').textContent = obj.descr;
+    }
+    
+//    const centerX = window.innerWidth / 2;
+//    const centerY = window.innerHeight / 2;
+//const computedStyles = window.getComputedStyle(modal);
+//const top = computedStyles.top;
+//const left = computedStyles.left;
+//console.log(top + ' + ' + left);
+//
+//    modal.style.top = centerY - 130;
+//    modal.style.left = centerX - 100;
+
+    modal.classList.remove('hide');
+
 }
 
 
 function hide_modal()
 {
     document.getElementById(modal_window_id).classList.add('hide');
+}
+
+/**
+ * отправляет товар в корзину
+ * @param {Event} event
+ * @returns {undefined}
+ */
+function toBasket(event)
+{
+    //отправляет товар в корзину
+    hide_modal();
 }
 
 /**
