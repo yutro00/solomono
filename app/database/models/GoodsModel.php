@@ -20,15 +20,25 @@ class GoodsModel implements IModel
     
     private $sql = [
         'goods_default' => 'Select * FROM goods WHERE category_id = 1 order by name LIMIT 20',
-        'goods' => 'Select * FROM goods WHERE category_id = %s order by %s LIMIT %s',
         
+//'goods' =>
+//'SELECT goods.*, image.path as path, image.name as file
+//FROM goods, image 
+//WHERE category_id = %s AND image.goods_id = goods.id 
+//ORDER by name 
+//LIMIT 10',
+
 'goods' =>
 'SELECT goods.*, image.path as path, image.name as file
-FROM goods, image 
-WHERE category_id = %s AND image.goods_id = goods.id 
-ORDER by name 
-LIMIT 10',
-
+FROM goods
+LEFT JOIN image
+ON goods.id = image.goods_id
+WHERE category_id = %s
+ORDER by %s
+LIMIT %s',
+        
+        
+        
         'goods_alphabet' => 'Select * FROM goods WHERE category_id = 4 LIMIT 20',
         'goods_rating' => 'Select * FROM goods WHERE category_id = 4 LIMIT 20',
         'goods_priceinc' => '',
@@ -58,6 +68,17 @@ LIMIT 10',
     }
     
     
+    public function getRecordData($number)
+    {
+        if ($number === '0') {
+            $str = 'first';
+            $sql = $this->getSql($str);
+        }
+        $res = $this->read($sql);
+        return $res;
+    }
+
+
     public function read($sql) 
     {
         $res;
@@ -128,15 +149,9 @@ LIMIT 10',
     {
 //        $res = '';
         if (count($arr) === 0 ) {
-//            return $arr;
             return 'Category is empty';
         }
-//        if ($arr[$i]['currency'] === 'us') {
-//            $currency = '$';
-//        } else {
-//           $currency = '';
-//        }
-
+$sum = 0;
         for ($i = 0; $i < count($arr); $i++) {
             $id = $arr[$i]['id'];
             $img = $this->getImgLink($arr[$i]['path'], $arr[$i]['file']);
@@ -148,6 +163,7 @@ LIMIT 10',
                 $currency = '';
             }
             $count = $arr[$i]['count'];
+$sum = $sum + $count;
             $description = $arr[$i]['description'];
             
             
@@ -165,14 +181,11 @@ LIMIT 10',
     
     public function getGoodsByCategoryArr($param)
     {
-        
-        
-        
+
         $str = $this->getSql('goods');
         
         $sql = sprintf($str, $param['cat'], $param['order'], $param['limit']);
         $res = $this->read($sql);
-        
         
         return $res;
     }

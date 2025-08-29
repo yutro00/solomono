@@ -27,10 +27,17 @@ class IndexController
      * отдаёт клиенту http страницу
      * @return type
      */
-    public function index() 
+    public function index()
     {
         $connect = Database::getConnection();
-        //извлекаем данные по категориям
+        if (!$connect) {
+            echo '<b>Нет соединения с БД.</b>' . "\n"
+            . 'Если БД отсутсвует запустите SQL скрипт /app/backup/smtest_bd_backup.sql.'
+            . "\n"
+            . 'Возможно надо исправить параметры подключения в БД в /app/config/config.ini';
+            exit;
+        }
+        //извлекаем данные о категориях
         $categoryModel = new CategoryModel($connect);
         $catArr = $categoryModel->getCategoriesArr();
         $firstCategoryId = $catArr[0]['id'];
@@ -38,19 +45,20 @@ class IndexController
         
         //извлекаем данные по умолчанию на товары из категории
         $goodsModel = new GoodsModel($connect);
-        $goodsArr = $goodsModel->getGoodsByCategoryDefaultArr($firstCategoryId);
+
+        $goodsConfig['cat'] = $firstCategoryId;
+        $goodsConfig['order'] = 'name';
+        $goodsConfig['limit'] = 10;
+        //$goodsConfig['lang'] = 'en';
+
+$goodsArr = $goodsModel->getGoodsByCategoryArr($goodsConfig);
+        
         $goodsByCategory = $goodsModel->getGoodsByCategoryStr($goodsArr);
-        
-        
+                
         $page = new Page('guest');
         
         $res = $page->getPageBeginning();
         $res .= '<div class="page-wrap">';
-        
-//        это надо реализовать!!!
-//        $currCategory = $categoryModel->getSelectedCategory();
-//        $goodsModel = new GoodsModel($connect);
-//        $goods = $goodsModel->getGoods($currCategory);
         
         
         $bodyData = [
