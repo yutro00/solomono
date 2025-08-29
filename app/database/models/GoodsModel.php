@@ -19,9 +19,16 @@ class GoodsModel implements IModel
     private $connection;
     
     private $sql = [
-        'goods_default' => 'Select * FROM goods WHERE category_id = 1 LIMIT 20',
+        'goods_default' => 'Select * FROM goods WHERE category_id = 1 order by name LIMIT 20',
         'goods' => 'Select * FROM goods WHERE category_id = %s order by %s LIMIT %s',
         
+'goods' =>
+'SELECT goods.*, image.path as path, image.name as file
+FROM goods, image 
+WHERE category_id = %s AND image.goods_id = goods.id 
+ORDER by name 
+LIMIT 10',
+
         'goods_alphabet' => 'Select * FROM goods WHERE category_id = 4 LIMIT 20',
         'goods_rating' => 'Select * FROM goods WHERE category_id = 4 LIMIT 20',
         'goods_priceinc' => '',
@@ -81,13 +88,13 @@ class GoodsModel implements IModel
         if (is_null($params)) {
             $res = $this->sql[$str];
         } else {
-            $res = $this->getSqlWithParam();
+            $res = $this->getSqlWithParam($str, $params);
         }
         return $res;
     }
     
     
-    private function sqlWithParam($sqlStr, $params)
+    private function getSqlWithParam($sqlStr, $params)
     {
         
     }
@@ -119,18 +126,20 @@ class GoodsModel implements IModel
     
     public function getGoodsByCategoryStr($arr)
     {
-        $res = '';
+//        $res = '';
         if (count($arr) === 0 ) {
-            return $arr;
+//            return $arr;
+            return 'Category is empty';
         }
-        if ($arr[$i]['currency'] === 'us') {
-            $currency = '$';
-        } else {
-           $currency = '';
-        }
+//        if ($arr[$i]['currency'] === 'us') {
+//            $currency = '$';
+//        } else {
+//           $currency = '';
+//        }
 
         for ($i = 0; $i < count($arr); $i++) {
             $id = $arr[$i]['id'];
+            $img = $this->getImgLink($arr[$i]['path'], $arr[$i]['file']);
             $name = $arr[$i]['name'];
             $price = $arr[$i]['price'];
             if ($arr[$i]['currency'] === 'us') {
@@ -141,12 +150,13 @@ class GoodsModel implements IModel
             $count = $arr[$i]['count'];
             $description = $arr[$i]['description'];
             
+            
             $productCard[$i] = include '/var/www/html/solomono/app/views/templates/productCardTempl.php';
         }
-//        $res = '';
+        $res = '';
         if (count($productCard) > 0) {
-            for ($i = 0; $i < count($productCard); $i++) {
-                $res .= $productCard[$i];
+            for ($j = 0; $j < count($productCard); $j++) {
+                $res .= $productCard[$j];
             }
         }
         return $res;
@@ -164,6 +174,19 @@ class GoodsModel implements IModel
         $res = $this->read($sql);
         
         
+        return $res;
+    }
+    
+    
+    function getImgLink($path, $name)
+    {
+        if (is_null($path)) {
+            $path = '/app/resources/image/';
+        }
+        if (is_null($name)) {
+            $name = 'dog-sorry.jpg';
+        }
+        $res = $path . $name;
         return $res;
     }
     

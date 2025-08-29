@@ -22,7 +22,7 @@ return
         . `\n<h4 class=\"modal-product-name\">name: </h4>`
 
 . "\n<span class=\"img\">"
-        . 'productImage'
+        . '<img src="/app/resources/image/computer2.jpeg">'
         . "\n</span>"
 
         . "\n<span id=\"modal_price\" class=\"product-price\">"

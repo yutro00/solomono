@@ -32,7 +32,7 @@ class PageFooter
     
     
     /**
-     * возвращает html строку c заголовком документа
+     * возвращает html строку c подвалом документа
      * @return String
      */
     public function getFooter() 
