@@ -303,5 +303,3 @@ function getOptionValue(select)
     return res;
 }
 
-
-//alert('It is index.js');

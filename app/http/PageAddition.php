@@ -29,12 +29,20 @@ class PageAddition
         if (is_null($res)) {
             $res = '';
         }
+        $res .=  $this->getScript();
         return $res;
     }
     
     public function getLayout()
     {
         $res = include './app/views/templates/additionLayoutTempl.php';
+        return $res;
+    }
+    
+    
+    public function getScript()
+    {
+        $res = include './app/views/templates/additionScriptTempl.php';
         return $res;
     }
     

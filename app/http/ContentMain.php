@@ -15,15 +15,7 @@ class ContentMain
     
     
     public function getContentMain($data)
-    {
-        
-        
-//        $data = '<div class="product">'
-//        . "\n<span class=\"img\">"
-//        . '$productImage'
-//        . '<span>'
-//        . "\n</span>";
-                
+    {           
         $res = '';
         $res .= "\n\n" . '<section id = "goods" class="main-content">';
           $res .= $data;

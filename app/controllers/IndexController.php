@@ -31,7 +31,7 @@ class IndexController
     {
         $connect = Database::getConnection();
         if (!$connect) {
-            echo '<b>Нет соединения с БД.</b>' . "\n"
+            echo '<div style="color:red;"><b>Нет соединения с БД.</b></div>'
             . 'Если БД отсутсвует запустите SQL скрипт /app/backup/smtest_bd_backup.sql.'
             . "\n"
             . 'Возможно надо исправить параметры подключения в БД в /app/config/config.ini';

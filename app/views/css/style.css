@@ -1,6 +1,5 @@
 :root {
-  /*--main-bg-color: #f5f5f5;*/
-  --main-bg-color: white;
+  --main-bg-color: #dff2f3;;
   --wrap-width : 90%;
 }
 
@@ -202,8 +201,7 @@ color: yellow;
 .sbleft_category a,
 .sbleft_subcategory {
     text-decoration: none;
-    /*color: green;*/
-    color: #3fea3f;
+    color: #25a025;
 }
 
 .sbleft-more {
