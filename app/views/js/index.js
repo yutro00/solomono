@@ -25,7 +25,11 @@ document.addEventListener('DOMContentLoaded', function()
     document.getElementById('sbleft_category').addEventListener('click', getGoodsAjax);
     document.getElementById('goods').addEventListener('click', showProductModal);
     document.getElementById('goods_order').addEventListener('change', changeOrder);
+    document.getElementById('goods_order').addEventListener('change', changeLocation);
+    document.getElementById('goods_view').addEventListener('change', changeLocation);
+    document.getElementById('goods_limit').addEventListener('change', changeLocation);
 
+goods_limit
 });
 
 
@@ -440,4 +444,40 @@ function getGoodsNewOrder(arr, oldWrap)
  
 //    }
     return res;
+}
+
+/**
+ * изменяет адрессную стрку браузера
+ * @param {Event} event
+ * @returns {undefined}
+ */
+function changeLocation(event)
+{
+    let key;
+    let elem = event.target;
+    switch (elem.id) {
+        case 'goods_view':
+            key = 'view';
+            break;
+        case 'goods_limit':
+            key = 'limit';
+            break;
+        case 'goods_order':
+            key = 'order';
+            break;
+        default :
+            return ;
+    }
+    let optionValue = getOptionValue(elem);
+    const currentUrl = window.location.href;
+    let newUrl;
+    if (currentUrl.indexOf(key) > -1) {
+        return ;
+    }
+    if (currentUrl.indexOf('?') === -1) {
+        newUrl = currentUrl + `?${key}=` + optionValue;
+    } else {
+        newUrl = currentUrl + `&${key}=` + optionValue;
+    }
+    history.pushState(null, null, newUrl);//вставим ссылку в адресную строку
 }
