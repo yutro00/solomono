@@ -254,7 +254,9 @@ function getProductProperties(card)
     let obj = {};
     obj.id = card.id.substr(5);
 //    let imageOrigin = card.querySelector('.img img').innerText;
-//    obj.image = imageOrigin.cloneNode(true);
+//    imageOrigin = card.querySelector('span.img');
+    let imageOrigin = card.querySelector('span.img img');
+    obj.image = imageOrigin.cloneNode(true);
     obj.name = card.querySelector('.product-name').innerText;
     obj.price = card.querySelector('.product-price').innerText;
     obj.descr = card.querySelector('.product-descr').innerHTML;
@@ -270,6 +272,8 @@ function getProductProperties(card)
 function showModal(id, obj)
 {
     let modal = document.getElementById(id);
+    modal.querySelector('span.img').innerHTML = '';
+    modal.querySelector('span.img').append(obj.image);
     modal.querySelector('#modal_price').textContent = obj.price;
     modal.querySelector('#modal_name').textContent = obj.name;
     if (obj.descr === '' || obj.descr === undefined) {
@@ -282,7 +286,7 @@ function showModal(id, obj)
 //    const centerY = window.innerHeight / 2;
 //const computedStyles = window.getComputedStyle(modal);
 //const top = computedStyles.top;
-//const left = computedStyles.left;
+//const left = computgetGoodsNewOrderedStyles.left;
 //console.log(top + ' + ' + left);
 //
 //    modal.style.top = centerY - 130;
@@ -363,7 +367,7 @@ function getGoodsListArr(containerId)
 
 function orderAlphabet(arr)
 {
-    arr.sort((a, b) => a.name - b.name);
+    arr.sort((a, b) => a.name - b.name);    
     console.log(arr);
 }
 
@@ -402,7 +406,8 @@ function orderNewest(arr)
 
 /**
  * выводит список товаров с новым порядком сортировки
- * @param {Array} arr - массив обоъектов со свойствами товаров страницы 
+ * @param {String} id - ID контейнера товаров
+ * @param {Array} arr - массив объектов со свойствами товаров страницы 
  */
 function setNewOrder(id, arr)
 {
