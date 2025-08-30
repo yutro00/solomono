@@ -7,16 +7,16 @@
 
 
 $res =
-"\n<div id=\"prod_{$id}\" class=\"product\">"
+"\n<div id=\"prod_{$id}\" class=\"product\" data-order=\"{$order}\">"
         . "\n<span class=\"img\">"
 //        . '<img src="/app/resources/image/computer2.jpeg">'
         . "<img src=\"{$img}\">"
         . "\n</span>"
         
         . "\n<span class=\"product-price\">"
-        . "\n"
-        . "{$currency}{$price} "
-        . "\n</span>"
+//        . "\n"
+        . "{$currency}{$price}"
+        . '</span>'
         
         . "\n<span class=\"bt-buy\">"
         . "<input type=\"button\" data-product-id=\"prod_{$id}\" value=\"Buy\">"

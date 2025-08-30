@@ -51,7 +51,7 @@ class IndexController
         $goodsConfig['limit'] = 10;
         //$goodsConfig['lang'] = 'en';
 
-$goodsArr = $goodsModel->getGoodsByCategoryArr($goodsConfig);
+        $goodsArr = $goodsModel->getGoodsByCategoryArr($goodsConfig);
         
         $goodsByCategory = $goodsModel->getGoodsByCategoryStr($goodsArr);
                 

@@ -165,7 +165,7 @@ $sum = 0;
             $count = $arr[$i]['count'];
 $sum = $sum + $count;
             $description = $arr[$i]['description'];
-            
+            $order = $i;
             
             $productCard[$i] = include '/var/www/html/solomono/app/views/templates/productCardTempl.php';
         }

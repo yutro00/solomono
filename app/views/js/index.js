@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function()
 {
     setCategoryName(sourceClass, categoryNameId);
 
-    
     document.getElementById('lang_select').addEventListener('change', langClick);
     document.getElementById('currency_select').addEventListener('change', CurrencyClick);
     document.getElementById('readme').addEventListener('click', readmeClick);
@@ -25,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function()
     document.getElementById('sbleft_category').addEventListener('click', sbCategoryClick);
     document.getElementById('sbleft_category').addEventListener('click', getGoodsAjax);
     document.getElementById('goods').addEventListener('click', showProductModal);
+    document.getElementById('goods_order').addEventListener('change', changeOrder);
 
 });
 
@@ -177,6 +177,42 @@ function getGoodsByCategory(catId, destId)
 }
 
 /**
+ * обработчик change элемента выбора сортировки
+ * @param {Event} event
+ * @returns {undefined}
+ */
+function changeOrder(event)
+{
+    let elem = event.target;
+    let order = getOptionValue(elem);
+    let conteinetId = 'goods';           //ID контейнера списка товаров
+    let arr = getGoodsListArr(conteinetId); //
+    switch (order) {
+        case 'alphabet' : 
+            orderAlphabet(arr);
+            break;
+        case 'rating' : 
+            
+            break;
+        case 'priceinc' :
+            orderPriceinc(arr);
+            break;
+        case 'pricedec' : 
+            orderPricedec(arr);
+            break;
+        case 'rating' : 
+//            orderRating(arr);
+            break;
+        case 'newest' : 
+//            orderNewest(arr);
+            break;
+        default : 
+            orderAlphabet(arr);
+    }
+    setNewOrder(conteinetId, arr);
+}
+
+/**
  * возвращает ID выбранной категории
  * @param {type} className
  * @returns {null.id|Object.id}
@@ -217,11 +253,10 @@ function getProductProperties(card)
 {
     let obj = {};
     obj.id = card.id.substr(5);
-//    obj.image ???
+//    let imageOrigin = card.querySelector('.img img').innerText;
+//    obj.image = imageOrigin.cloneNode(true);
     obj.name = card.querySelector('.product-name').innerText;
     obj.price = card.querySelector('.product-price').innerText;
-    obj.descr = card.querySelector('.product-descr').innerText;
-    obj.descr = card.querySelector('.product-descr').textContent;
     obj.descr = card.querySelector('.product-descr').innerHTML;
     return obj;
 }
@@ -285,14 +320,14 @@ function toBacket()
 }
 
 /**
- * возвращает выбранную величину тега Select 
+ * возвращает выбранную величину тега Select
+ * @param {String} id - ID элемента SELECT 
  * @returns {undefined}
  */
 function getSelectedValue(id)
 {
     const elem = document.getElementById(id);
     const res = elem.options[elem.selectedIndex].value;
-    
     return res;
 }
 
@@ -303,3 +338,101 @@ function getOptionValue(select)
     return res;
 }
 
+/**
+ * возвращает массив объектов с параметрами товаров страницы
+ * @param {String} containerId - контейнен DIVов;
+ * @returns {Array}
+ */
+function getGoodsListArr(containerId)
+{
+    let arr = new Array();
+    let divList = document.getElementById(containerId);
+    let list = divList.querySelectorAll('[data-order]');
+    for (let i = 0; i < list.length; i++) {
+        arr[i] = {
+            old_order : list[i].dataset.order,
+            price : list[i].querySelector('.product-price').textContent.substr(1),
+            name : list[i].querySelector('.product-name').textContent,
+//            data : list[i].querySelector('.product-arrivel').textContent  //На будущ. развитие Не удалять!!! 
+            new_order : ""
+        };
+    }
+    return arr;
+}
+
+
+function orderAlphabet(arr)
+{
+    arr.sort((a, b) => a.name - b.name);
+    console.log(arr);
+}
+
+/**
+ * изменяет порядок элементов входного массива по возрастанию цены 
+ * @param {Array} arr - массив обоъектов со свойствами товаров страницы
+ * @returns {void}
+ */
+function orderPriceinc(arr)
+{
+    arr.sort((a, b) => a.price - b.price);
+}
+
+/**
+ * изменяет порядок элементов входного массива по убыванию цены 
+ * @param {Array} arr - массив обоъектов со свойствами товаров страницы
+ * @returns {void}
+ */
+function orderPricedec(arr)
+{
+    arr.sort((a, b) => b.price - a.price);
+//    console.log(arr);
+}
+
+
+function orderRating(arr)
+{
+    
+}
+
+
+function orderNewest(arr)
+{
+    
+}
+
+/**
+ * выводит список товаров с новым порядком сортировки
+ * @param {Array} arr - массив обоъектов со свойствами товаров страницы 
+ */
+function setNewOrder(id, arr)
+{
+    let goodsWrap = document.getElementById(id);
+
+//    let arrOrdered = getGoodsNewOrder(arr, goodsWrap, 'alphabet');
+    let arrOrdered = getGoodsNewOrder(arr, goodsWrap);
+
+    goodsWrap.innerHTML = '';
+    for (let j = 0; j < arrOrdered.length; j++) {
+        goodsWrap.append(arrOrdered[j]);
+    }
+}
+
+
+//function getGoodsNewOrder(arr, oldWrap, order = '')
+function getGoodsNewOrder(arr, oldWrap)
+{
+    let res = [];
+    
+//    if (order === '') {
+        for (let i =0; i < arr.length; i++) {
+            let ord = arr[i].old_order;
+            let selector = `div[data-order="${ord}"]`;
+            let elem = oldWrap.querySelector(selector);   //выбирает отображаемый товар
+            res[i] = elem;
+        }
+//    }
+//    if (order === 'alphabet') {
+ 
+//    }
+    return res;
+}
