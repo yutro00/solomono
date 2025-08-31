@@ -32,11 +32,12 @@ class PageHeader
     
     public function __construct($cfg)
     {
-        if (isset($conf)) {
+        if (isset($cfg)) {
             $this->conf = $cfg;
         } else {
             $this->conf = $this->confDefault; 
         }
+
         if ($this->conf['header1'] <> '') {
             $this->header1 = new PageHeader1();
         }
@@ -72,8 +73,6 @@ class PageHeader
             $res .=  $this->header3->getHeader();
         }
         $res .= "\n" . '</header>';
-
-        
         return $res;
     }
     

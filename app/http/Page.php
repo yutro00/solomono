@@ -26,9 +26,9 @@ class Page extends APage implements IPage
         'page_type' => 'index',
         'header1' => true,
         'header2' => true,
-//        'header3' => true,
+        'header3' => true,
         'basket' => '',
-        'category_count' => '8',    //число пунктов в строке категорий, не более
+        'category_count' => '8',    //число отображаемых пунктов в строке категорий, не более
     ];
     
     private $conf;
@@ -55,12 +55,11 @@ class Page extends APage implements IPage
         $role = $this->getUserRole();
         if ($role === 'guest') {
             $this->conf = $this->confDefault;
-            $head = new PageHead();
+            $head = $this->createPageObject('page-head');
             $this->head = $head->getHead();
-            
+            $this->bodyObj = $this->createPageObject('body', $this->conf);
             $this->bodyObj = new Body($this->conf);
-
-//            $this->footer = $this->getBodyObj->getFooter();
+//            $this->footer = $this->getBodyObj->getFooter();   //может использоваться при другом конфиге
         }
     }
   
@@ -199,4 +198,28 @@ class Page extends APage implements IPage
         return $res;
     }
 
+    
+    public static function createPageObject($key, $config = null)
+    {
+        $res;
+        switch ($key) {
+            case 'page-head' :
+                if (is_null($config)) {
+                    $res = new PageHead();
+                } else {
+                    $res = new PageHead($config);
+                }
+                break;
+            case 'body' :
+                if (is_null($config)) {
+                    $res = new Body();
+                } else {
+                    $res = new Body($config);
+                }
+                break;
+        }
+        return $res;
+    }
+    
 }
+

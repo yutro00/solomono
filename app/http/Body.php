@@ -33,17 +33,48 @@ class Body
     public function __construct($cfg) 
     {
         $this->conf = $cfg;
-        $this->header = new PageHeader($cfg);
-        $this->content = new PageContent();
+        $this->header = self::createBodyObject('page-header', $cfg);
+        $this->content = self::createBodyObject('page-content');
         $this->footer = new PageFooter();
         $this->addition = new PageAddition();
     }
     
     
     
-    public static function createPageObject($param)
+    public static function createBodyObject($key, $param = null)
     {
-        
+        $res;
+        switch ($key) {
+            case 'page-header' :
+                if (is_null($param)) {
+                    $res = new PageHeader();
+                } else {
+                    $res = new PageHeader($param);
+                }
+                break;
+            case 'page-content' :
+                if (is_null($param)) {
+                    $res = new PageContent();
+                } else {
+                    $res = new PageContent($param);
+                }
+                break;
+            case 'page-footer' :
+                if (is_null($param)) {
+                    $res = new PageFooter();
+                } else {
+                    $res = new PageFooter($param);
+                }
+                break;
+            case 'page-addition' :
+                if (is_null($param)) {
+                    $res = new PageAddition();
+                } else {
+                    $res = new PageAddition($param);
+                }
+                break;
+        }
+        return $res;
     }
 
     
@@ -65,7 +96,10 @@ class Body
     }
     
     
-    
+    /** возвращает доп. ресурсы, если таковые есть в объекте
+     * 
+     * @return type
+     */
     public function getAddition() 
     {
         if (isset($this->addition)) {

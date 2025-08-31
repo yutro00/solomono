@@ -28,7 +28,6 @@ class PageContent
     
     private $sidebar;
     
-//private $content;
     private $contentHeader;     //шапка основного контента
     private $contentMain;       //основной контент страницы (тег MAIN)
     
@@ -40,9 +39,9 @@ class PageContent
         } else {
             $this->conf = $this->confDefault;
         }
-        if ($this->conf['sidebar_left'] && $this->conf['sidebar_right']) {
+        if ($this->conf['sidebar_left'] && $this->conf['sidebar_right']) {  //не реализовано    
             $sbConf = [];
-            $this->sidebar = new Sidebar($sbConf);
+            $this->sidebar = new Sidebar($sbConf);  
         }
         if ($this->conf['sidebar_left']) {
             $sidebarCfg = [];

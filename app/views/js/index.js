@@ -58,13 +58,14 @@ function CurrencyClick(event)
 function readmeClick(event)
 {
     let readme = "Замечания к проекту. \n\
-        Этот тестовый проект создан на чистых PHP и Javascript, никакие библиотеки не были использованы.\n\
-        \n\Поскольку это тестовое задание и конкретные детали не оговаривались, в проекте не были реализованы: \n";
+        Этот тестовый проект создан на чистых PHP и Javascript, никакие сторонние библиотеки не были использованы.\n\
+        \n\Поскольку это тестовое задание и необходимо было реализовать лишь ряд требований, \n\
+в проекте не были реализованы: \n";
     readme += '  локализация; \n  горизонтальное меню; \n  поиск; \n  изменение языка интерфейса и валюты; \n\
-  строка breadscrumb; \n пагинация; \n  упрощен footer страницы; \n\
+  строка breadscrumb; \n  упрощен footer страницы; \n\
   т.к. предполагается вакансия PHP developer, над версткой слишком не заморачивался.';
     readme += '\n\
-              Тем не менее надеюсь, представленное позволит вам оценить компетенции претендента.';
+              Тем не менее, надеюсь, представленное позволит вам оценить компетенции претендента.';
     
     alert(readme);
 //    let setDb = prompt('Запустить скрипт установки БД?', 'Yes');
@@ -447,7 +448,7 @@ function getGoodsNewOrder(arr, oldWrap)
 }
 
 /**
- * изменяет адрессную стрку браузера
+ * изменяет адресную строку браузера
  * @param {Event} event
  * @returns {undefined}
  */
@@ -470,14 +471,64 @@ function changeLocation(event)
     }
     let optionValue = getOptionValue(elem);
     const currentUrl = window.location.href;
-    let newUrl;
+    let newUrl;  
+    
     if (currentUrl.indexOf(key) > -1) {
-        return ;
-    }
-    if (currentUrl.indexOf('?') === -1) {
-        newUrl = currentUrl + `?${key}=` + optionValue;
+        let keyName = key + "=";
+          // пока!!! Потом добавлю
+       newUrl = updateLocation(currentUrl, keyName, optionValue); 
     } else {
-        newUrl = currentUrl + `&${key}=` + optionValue;
+        let paramStr = key + "=" + optionValue;
+        newUrl = addToLocation(currentUrl, paramStr);
     }
+
     history.pushState(null, null, newUrl);//вставим ссылку в адресную строку
+}
+
+
+function addToLocation(currUrl, newParam)
+{
+    let res;
+    if (currUrl.indexOf('?') === -1) {
+        res = currUrl + `?${newParam}`;
+    } else {
+        res = currUrl + `&${newParam}`;
+    }
+    return res;
+}
+
+
+function updateLocation(currUrl, key, value)
+{
+    let res;
+    let urlReq = currUrl.split('?');    //[0]-adress,[1]-request
+    
+    let urlParams = urlReq[1].split('&');
+    for (let i = 0; i < urlParams.length; i++) {
+        if (urlParams[i].indexOf(key) > -1) {
+            urlParams[i] = `${key}${value}`;
+        }
+//        
+//        if (urlParams[i].indexOf(key) > -1 &&
+//                i === 0) {
+//            urlParams[i] = `?${key}${value}`;
+//        }
+//        if (urlParams[i].indexOf(key) > -1 &&
+//                i > 0) {
+//            urlParams[i] = `${key}${value}`;
+//        }
+    }
+    urlParams[0] = `${urlReq[0]}?` + urlParams[0];
+    res =  urlParams.join('&');
+    
+//    let keyInd = currUrl.indexOf(key);
+//    let valueInd = currUrl.indexOf(value, keyInd);
+//    valueInd = currUrl.indexOf(, keyInd);
+    
+console.log(res);
+//    let keyInd = currUrl.indexOf(key);
+//    let valueind = currUrl.indexOf(value);
+//    
+   
+    return res;
 }

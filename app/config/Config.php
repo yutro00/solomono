@@ -12,7 +12,8 @@
  */
 class Config
 {
-    static private $file = '/var/www/html/solomono/app/config/config.ini';
+//    static private $file = '/var/www/html/solomono/app/config/config.ini';
+    static private $file = './app/config/config.ini';
     static private $sections = ['app', 'database'];
     static private $conf;
     

@@ -12,7 +12,9 @@ require_once 'routes.php';
 require_once 'constants.php';
 
 
+
 Config::setConfig();  //загружаем конфигурацию обязательно!!!
+
 
 //режим отладки
 $debug = Config::getConfig()['app']['debug'];
@@ -24,8 +26,21 @@ if ($debug) {
     error_reporting($level);
 }
 
-setDbConnection();      //устанавливаем связь с БД
-
+//устанавливаем связь с БД
+$arr = Config::getConfig()['database'];
+$dbConnection = Database::setConnection($arr);
+        
+//        Config::getConfig(
+//        ['database']['host'],
+//        ['database']['user'],
+//        ['database']['psw'],
+//        ['database']['dbname'],
+//        ));
+if (is_null($dbConnection)) {
+    echo "\n" . Database::getTips();    
+    die();
+    
+}
 
 $request_uri = $_SERVER['REQUEST_URI'];
 
