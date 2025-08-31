@@ -90,6 +90,7 @@ class IndexController
         echo "It is about response!!!";
     }
     
+    
     public function getGoodsByCategory()
     {
         $goodsConfig = [];
@@ -117,8 +118,10 @@ class IndexController
         $connect = Database::getConnection();
         $goodsModel = new GoodsModel($connect);
         $goodsArr = $goodsModel->getGoodsByCategoryArr($goodsConfig);
+        
         if (count($goodsArr) > 0) {
             $goodsByCategory = $goodsModel->getGoodsByCategoryStr($goodsArr);
+            $GoodsByCategoryCount = count($goodsArr);
         } else {
             $goodsByCategory = "This category is empty\n";
         }

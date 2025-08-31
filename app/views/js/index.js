@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function()
     document.getElementById('nav-header').addEventListener('click', menuClick);
     document.getElementById('sbleft_category').addEventListener('click', sbCategoryClick);
     document.getElementById('sbleft_category').addEventListener('click', getGoodsAjax);
+    document.getElementById('sbleft_category').addEventListener('mouseover', CategoryGoodsCount);
     document.getElementById('goods').addEventListener('click', showProductModal);
     document.getElementById('goods_order').addEventListener('change', changeOrder);
     document.getElementById('goods_order').addEventListener('change', changeLocation);
@@ -38,7 +39,7 @@ function langClick(event)
     let elem = event.target;
     let value = getOptionValue(elem);
     if (value !== 'en') {
-        alert('Извините, в этом тестовом проекте локализация пока не реализована');
+        alert('Вибачте, локалізація в цьому тестовому проекті не надається.');
         elem.value = 'en';
     }
 }
@@ -49,7 +50,7 @@ function CurrencyClick(event)
     let elem = event.target;
     let value = getOptionValue(elem);
     if (value !== 'en') {
-        alert('Извините, пересчет стоимости на другую валюту пока не производится');
+        alert('Sorry, recalculation to another currency is not provided.');
         elem.value = 'en';
     }
 }
@@ -140,7 +141,6 @@ function getGoodsAjax(event)
         catId = id.substring(4);
         getGoodsByCategory(catId, goodsListId);
     }
-    
 }
 
 /**
@@ -180,6 +180,21 @@ function getGoodsByCategory(catId, destId)
     
     xhr.send();    
 }
+
+
+function CategoryGoodsCount(event)
+{
+    if (event.target.nodeName === 'A') {
+        getGoodsCount('1');
+    }
+}
+
+
+function getGoodsCount(catId)
+{
+    //отправить Ajax и получить количество
+}
+
 
 /**
  * обработчик change элемента выбора сортировки

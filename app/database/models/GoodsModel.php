@@ -151,7 +151,7 @@ LIMIT %s',
         if (count($arr) === 0 ) {
             return 'Category is empty';
         }
-$sum = 0;
+//$sum = 0;
         for ($i = 0; $i < count($arr); $i++) {
             $id = $arr[$i]['id'];
             $img = $this->getImgLink($arr[$i]['path'], $arr[$i]['file']);
@@ -163,11 +163,12 @@ $sum = 0;
                 $currency = '';
             }
             $count = $arr[$i]['count'];
-$sum = $sum + $count;
+//$sum = $sum + $count;
             $description = $arr[$i]['description'];
             $order = $i;
             
-            $productCard[$i] = include '/var/www/html/solomono/app/views/templates/productCardTempl.php';
+//            $productCard[$i] = include '/var/www/html/solomono/app/views/templates/productCardTempl.php';
+            $productCard[$i] = include './app/views/templates/productCardTempl.php';
         }
         $res = '';
         if (count($productCard) > 0) {
@@ -185,7 +186,7 @@ $sum = $sum + $count;
         $str = $this->getSql('goods');
         
         $sql = sprintf($str, $param['cat'], $param['order'], $param['limit']);
-        $res = $this->read($sql);
+            $res = $this->read($sql);
         
         return $res;
     }
