@@ -53,6 +53,19 @@ class IndexController
 
         $goodsArr = $goodsModel->getGoodsByCategoryArr($goodsConfig);
         
+
+//        if (count($goodsArr) > 0) {
+//            $goodsByCategory = $goodsModel->getGoodsByCategoryStr($goodsArr);
+//            $GoodsByCategoryCount = count($goodsArr);
+//            $obj = new stdClass();
+//            $obj ->goods = $goodsByCategory;
+//            $obj ->count = $GoodsByCategoryCount;
+//            $response = json_encode($obj);
+//        } else {
+//            $goodsByCategory = "This category is empty\n";
+//        }
+        
+        
         $goodsByCategory = $goodsModel->getGoodsByCategoryStr($goodsArr);
                 
         $page = new Page('guest');
@@ -122,10 +135,14 @@ class IndexController
         if (count($goodsArr) > 0) {
             $goodsByCategory = $goodsModel->getGoodsByCategoryStr($goodsArr);
             $GoodsByCategoryCount = count($goodsArr);
+            $obj = new stdClass();
+            $obj ->goods = $goodsByCategory;
+            $obj ->count = $GoodsByCategoryCount;
+            $response = json_encode($obj);
         } else {
             $goodsByCategory = "This category is empty\n";
         }
-        echo $goodsByCategory;
+        echo $response;
     }
 }
 

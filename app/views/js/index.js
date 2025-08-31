@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function()
     document.getElementById('nav-header').addEventListener('click', menuClick);
     document.getElementById('sbleft_category').addEventListener('click', sbCategoryClick);
     document.getElementById('sbleft_category').addEventListener('click', getGoodsAjax);
-    document.getElementById('sbleft_category').addEventListener('mouseover', CategoryGoodsCount);
+//    document.getElementById('sbleft_category').addEventListener('mouseover', CategoryGoodsCount);
     document.getElementById('goods').addEventListener('click', showProductModal);
     document.getElementById('goods_order').addEventListener('change', changeOrder);
     document.getElementById('goods_order').addEventListener('change', changeLocation);
@@ -164,13 +164,24 @@ function getGoodsByCategory(catId, destId)
     // список товаров категории пришел
     xhr.addEventListener('load', function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            const responseData = xhr.responseText;
+            const responseData = xhr.response;
 //            const responseData = JSON.parse(xhr.responseText);
-            document.getElementById(destId).innerHTML = responseData;
+            let response = JSON.parse(responseData);
+            let goods = response.goods;
+            let count = response.count;
+            let goodsQuantity = ', product quantity: ' + count;
+            document.getElementById(destId).innerHTML = goods; 
+            
+            //меняем заголовок категории и кол-во в шапке списка товаров
+            let categoryTitle = document.getElementById('category_name');
+            categoryTitle.textContent = document.querySelector('.selected').
+                    textContent + goodsQuantity;
+            
         }
         //меняем заголовок категории в шапке main
-        document.getElementById('category_name').textContent = 
-                document.querySelector('.selected').textContent;
+//        document.getElementById('category_name').textContent = 
+//                document.querySelector('.selected').textContent + 
+//                    '  count: ' + count;
 
     });
     
@@ -190,10 +201,10 @@ function CategoryGoodsCount(event)
 }
 
 
-function getGoodsCount(catId)
-{
-    //отправить Ajax и получить количество
-}
+//function getGoodsCount(catId)
+//{
+//    //отправить Ajax и получить количество
+//}
 
 
 /**
