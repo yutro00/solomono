@@ -132,7 +132,6 @@ class CategoryModel implements IModel
     
     public function getCategoriesStr($arr)
     {
-//        $arr = $this->getCategoriesArr();
         $res = $this->getUlTag($arr);
         return $res;
     }
@@ -241,7 +240,6 @@ $lang = 'en';       //ВРЕМЕННО!!!
         $res = "\n";
         $res .= "\n" . '<ul id = "sbleft_category" class="sbleft_category">';
         $res .= "\n";
-//        $res .= $this->getLiTag($arr[0], '', 'sbleft-li-selected');
         $res .= $this->getLiTag($arr[0], '', 'selected');
         for ($i = 1; $i < count($arr); $i++) {
             if (is_null($arr[$i]['sub_cat'])) {
@@ -271,7 +269,8 @@ $lang = 'en';       //ВРЕМЕННО!!!
             $res = "\n<li class=\"$class\">";
         }
         $id = 'cat_' . $arr['id'];
-        $res .= "\n<a id = \"$id\" href=\"#\">";
+//        $res .= "\n<a id = \"$id\" href=\"#\">";
+$res .= "\n<a id = \"$id\" href=\"javascript:void(0)\">";
         $res .= $arr['name'];
         if ($more <> '') {
             $res .= '<span class="sbleft-more">&raquo;</span>';

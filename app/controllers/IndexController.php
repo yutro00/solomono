@@ -51,20 +51,7 @@ class IndexController
         $goodsConfig['limit'] = 10;
         //$goodsConfig['lang'] = 'en';
 
-        $goodsArr = $goodsModel->getGoodsByCategoryArr($goodsConfig);
-        
-
-//        if (count($goodsArr) > 0) {
-//            $goodsByCategory = $goodsModel->getGoodsByCategoryStr($goodsArr);
-//            $GoodsByCategoryCount = count($goodsArr);
-//            $obj = new stdClass();
-//            $obj ->goods = $goodsByCategory;
-//            $obj ->count = $GoodsByCategoryCount;
-//            $response = json_encode($obj);
-//        } else {
-//            $goodsByCategory = "This category is empty\n";
-//        }
-        
+        $goodsArr = $goodsModel->getGoodsByCategoryArr($goodsConfig);        
         
         $goodsByCategory = $goodsModel->getGoodsByCategoryStr($goodsArr);
                 

@@ -5,22 +5,24 @@
  * Шаблон 3-го уровня шапки индексного файла
  */
 
+$noLink = 'javascript:void(0)';
+
 $res = "\n" . '<div class="header3">';
 $res .= "\n" . '<ul id="sb_navbar" class="navbar">'
                 . "\n<li>"
-                . '<a href="#">Item1</a>'
+                . "<a href=\"$noLink\">Item1</a>"
                 . "\n</li>"
                 . "\n<li>"
-                . '<a href="#">Item2&raquo;</a>'
+                . "<a href=\"$noLink\">Item2</a>"
                 . '</li>'
                 . "\n<li>"
-                . '<a href="#">Item3</a>'
+                . "<a href=\"$noLink\">Item3</a>"
                 . '</li>'
                 . "\n<li>"
-                . '<a href="#">Item4</a>'
+                . "<a href=\"$noLink\">Item4</a>"
                 . '</li>'
                 . "\n<li>"
-                . '<a href="#">Item5</a>'
+                . "<a href=\"$noLink\">Item5</a>"
                 . "\n<li>"
                 .  "\n" 
                 . '</ul>';

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function()
 
     document.getElementById('lang_select').addEventListener('change', langClick);
     document.getElementById('currency_select').addEventListener('change', CurrencyClick);
-    document.getElementById('readme').addEventListener('click', readmeClick);
+//    document.getElementById('readme').addEventListener('click', readmeClick);
     document.getElementById('nav-header').addEventListener('click', menuClick);
     document.getElementById('sbleft_category').addEventListener('click', sbCategoryClick);
     document.getElementById('sbleft_category').addEventListener('click', getGoodsAjax);
@@ -78,7 +78,7 @@ function menuClick(event)
     let elem = event.target;
     
     if (elem.tagName === 'A') {
-        preventDefault();   // не работает!!!
+
     }
     return false;
 }
@@ -140,6 +140,7 @@ function getGoodsAjax(event)
         let id = elem.id;
         catId = id.substring(4);
         getGoodsByCategory(catId, goodsListId);
+
     }
 }
 
@@ -284,8 +285,6 @@ function getProductProperties(card)
 {
     let obj = {};
     obj.id = card.id.substr(5);
-//    let imageOrigin = card.querySelector('.img img').innerText;
-//    imageOrigin = card.querySelector('span.img');
     let imageOrigin = card.querySelector('span.img img');
     obj.image = imageOrigin.cloneNode(true);
     obj.name = card.querySelector('.product-name').innerText;
@@ -297,8 +296,8 @@ function getProductProperties(card)
 /**
  * отображает модальное окно с товаром
  * @param {String} id - ID модального окна
- * @param {type} obj - oбъект с характеристиками товара
- * @returns {undefined}
+ * @param {Object} obj - oбъект с характеристиками товара
+ * @returns {}
  */
 function showModal(id, obj)
 {
@@ -399,7 +398,6 @@ function getGoodsListArr(containerId)
 function orderAlphabet(arr)
 {
     arr.sort((a, b) => a.name - b.name);    
-    console.log(arr);
 }
 
 /**
@@ -420,7 +418,6 @@ function orderPriceinc(arr)
 function orderPricedec(arr)
 {
     arr.sort((a, b) => b.price - a.price);
-//    console.log(arr);
 }
 
 
@@ -443,7 +440,6 @@ function orderNewest(arr)
 function setNewOrder(id, arr)
 {
     let goodsWrap = document.getElementById(id);
-
 //    let arrOrdered = getGoodsNewOrder(arr, goodsWrap, 'alphabet');
     let arrOrdered = getGoodsNewOrder(arr, goodsWrap);
 
@@ -454,22 +450,16 @@ function setNewOrder(id, arr)
 }
 
 
-//function getGoodsNewOrder(arr, oldWrap, order = '')
 function getGoodsNewOrder(arr, oldWrap)
 {
     let res = [];
     
-//    if (order === '') {
-        for (let i =0; i < arr.length; i++) {
-            let ord = arr[i].old_order;
-            let selector = `div[data-order="${ord}"]`;
-            let elem = oldWrap.querySelector(selector);   //выбирает отображаемый товар
-            res[i] = elem;
-        }
-//    }
-//    if (order === 'alphabet') {
- 
-//    }
+    for (let i =0; i < arr.length; i++) {
+        let ord = arr[i].old_order;
+        let selector = `div[data-order="${ord}"]`;
+        let elem = oldWrap.querySelector(selector);   //выбирает отображаемый товар
+        res[i] = elem;
+    }
     return res;
 }
 
@@ -496,7 +486,10 @@ function changeLocation(event)
             return ;
     }
     let optionValue = getOptionValue(elem);
-    const currentUrl = window.location.href;
+    let currentUrl = window.location.href;
+    if (currentUrl[currentUrl.length - 1] === '#') {
+        currentUrl = currentUrl.substring(0, currentUrl.length - 2);
+    }
     let newUrl;  
     
     if (currentUrl.indexOf(key) > -1) {
@@ -507,7 +500,6 @@ function changeLocation(event)
         let paramStr = key + "=" + optionValue;
         newUrl = addToLocation(currentUrl, paramStr);
     }
-
     history.pushState(null, null, newUrl);//вставим ссылку в адресную строку
 }
 
@@ -534,27 +526,8 @@ function updateLocation(currUrl, key, value)
         if (urlParams[i].indexOf(key) > -1) {
             urlParams[i] = `${key}${value}`;
         }
-//        
-//        if (urlParams[i].indexOf(key) > -1 &&
-//                i === 0) {
-//            urlParams[i] = `?${key}${value}`;
-//        }
-//        if (urlParams[i].indexOf(key) > -1 &&
-//                i > 0) {
-//            urlParams[i] = `${key}${value}`;
-//        }
     }
     urlParams[0] = `${urlReq[0]}?` + urlParams[0];
     res =  urlParams.join('&');
-    
-//    let keyInd = currUrl.indexOf(key);
-//    let valueInd = currUrl.indexOf(value, keyInd);
-//    valueInd = currUrl.indexOf(, keyInd);
-    
-console.log(res);
-//    let keyInd = currUrl.indexOf(key);
-//    let valueind = currUrl.indexOf(value);
-//    
-   
     return res;
 }

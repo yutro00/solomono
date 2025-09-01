@@ -6,6 +6,7 @@
  */
 
 
+$noLink = 'javascript:void(0)';
 
 $res = '<div class="header1">'
         . "\n"
@@ -22,16 +23,14 @@ $res = '<div class="header1">'
         . "\n" . '<option value="eur">EUR</option>'
         . "\n" . '/<select>'
         . "\n"
-//        . '<span class="phone">Phone:   +38 097 829-79-89'
-//        . '</span>'
-//        . "\n"
+//  <li id="readme" title="some comments to project">README!</li>
+
     . '<ul id="nav-header" class="nav-header">
-        <li id="readme" title="some comments to project">README!</li>
-        <li><a href="/">Home</a></li>
-        <li><a href="brands">Brands</a></li>
-        <li><a href="payment-and-shipping/a-79.html">Payment and Shipping</a></li>
-        <li><a href="warranty/a-80.html">Warranty</a></li>
-        <li><a href="contact_us.php">Contacts</a></li>'
+        <li><a href="/">Home</a></li>'
+        . "<li><a href=\"$noLink\">Brands</a></li>"
+        . "<li><a href=\"$noLink\">Payment and Shipping</a></li>"
+        . "<li><a href=\"$noLink\">Warranty</a></li>"
+        . "<li><a href=\"contact_us.php\">Contacts</a></li>"
 //        . "\n"
 //        . '<span class="phone">Phone:   +38 097 829-79-89'
 //        . '</span>'
