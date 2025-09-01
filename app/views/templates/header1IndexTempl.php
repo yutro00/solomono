@@ -26,6 +26,7 @@ $res = '<div class="header1">'
 //  <li id="readme" title="some comments to project">README!</li>
 
     . '<ul id="nav-header" class="nav-header">
+        <li id="readme" title="some comments to project">README!</li>
         <li><a href="/">Home</a></li>'
         . "<li><a href=\"$noLink\">Brands</a></li>"
         . "<li><a href=\"$noLink\">Payment and Shipping</a></li>"

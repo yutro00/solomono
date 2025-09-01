@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function()
 
     document.getElementById('lang_select').addEventListener('change', langClick);
     document.getElementById('currency_select').addEventListener('change', CurrencyClick);
-//    document.getElementById('readme').addEventListener('click', readmeClick);
+    document.getElementById('readme').addEventListener('click', readmeClick);
     document.getElementById('nav-header').addEventListener('click', menuClick);
     document.getElementById('sbleft_category').addEventListener('click', sbCategoryClick);
     document.getElementById('sbleft_category').addEventListener('click', getGoodsAjax);
