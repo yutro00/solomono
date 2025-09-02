@@ -165,6 +165,7 @@ LIMIT %s',
             $count = $arr[$i]['count'];
 //$sum = $sum + $count;
             $description = $arr[$i]['description'];
+            $admission = $this->getDateFromDateTime($arr[$i]['arrival']);
             $order = $i;
             
 //            $productCard[$i] = include '/var/www/html/solomono/app/views/templates/productCardTempl.php';
@@ -180,6 +181,19 @@ LIMIT %s',
     }
     
     
+    private function getDateFromDateTime($time)
+    {
+        $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $time);
+        if ($dateTime) {
+            $dateTime = $dateTime->format('Y-m-d');
+        } else {
+            //запись в лог о неверной дате
+            $dateTime = null;
+        }
+        return $dateTime;
+    }
+
+
     public function getGoodsByCategoryArr($param)
     {
 

@@ -22,7 +22,14 @@ $res =
         . "<input type=\"button\" data-product-id=\"prod_{$id}\" value=\"Buy\">"
         . "</span>"
         
-//        . "\n<span id=\"prod_{$id}\" class=\"product-name\">""
+        . "\n<span id=\"prod_quantity\" class=\"product-quantity\">"
+        . "quantity: {$count}"
+        . "\n</span>"
+
+        . "\n<span id=\"prod_admission\" class=\"product-quantity\">"
+        . "admission: {$admission}"
+        . "\n</span>"
+        
         . "\n<span class=\"product-name\">"
         . "\n {$name}"
         . "\n</span>"
@@ -31,28 +38,5 @@ $res =
         . "\n {$description}"
         . "\n</span>"
 . "\n</div>";
-        
-        
-        
-        
-//"\n<div class=\"product\">"
-//        . "\n<span class=\"img\">"
-//        . 'productImage'
-//        . "\n</span>"
-//        
-//        . "\n<span class=\"product-price\">"
-////        . "$85.00 "
-//        . "\n %s "
-//        . "\n</span>"
-//        
-//        . "\n<span class=\"bt-buy\">"
-//        . '<input type="button" value="Buy">'
-//        . "</span>"
-//        
-//        . "\n<span class=\"product-name\">"
-//        . 'Goods name'
-//        . "\n %s "
-//        . "\n</span>"
-//. "\n</div>";
 
 return $res;

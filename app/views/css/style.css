@@ -296,13 +296,16 @@ color: yellow;
     float: left;
     width: 32%;
     min-height: 300px;
-    max-height: 300px;
+    max-height: 310px;
     margin-top: 10px;
     margin-left: 1%;
     margin-bottom: 10px;
     border: solid 1px #f5f5f5;
     border-radius: 5px;
     overflow: hidden;
+}
+.product:hover {
+    max-height: 380px;
 }
 .product .img {
     display: inline-block;
@@ -337,10 +340,17 @@ color: yellow;
     background-color: #f9e442;
     border-radius: 5px;
 }
+.product-quantity {
+    /*float: left;*/
+    display: block;
+    clear: left;
+    margin-top: 5px;
+    margin-left: 5px;
+}
 .product .product-name {
     display: block;
     width: 90%;
-    margin: 26px auto auto 10px;
+    margin: 10px auto auto 10px;
     text-align: center;
     font-weight: bold;
 } 
