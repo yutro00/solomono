@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function()
     document.getElementById('goods_view').addEventListener('change', changeLocation);
     document.getElementById('goods_limit').addEventListener('change', changeLocation);
 
-goods_limit
 });
 
 
@@ -179,11 +178,6 @@ function getGoodsByCategory(catId, destId)
                     textContent + goodsQuantity;
             
         }
-        //меняем заголовок категории в шапке main
-//        document.getElementById('category_name').textContent = 
-//                document.querySelector('.selected').textContent + 
-//                    '  count: ' + count;
-
     });
     
     xhr.addEventListener('error', function() {
@@ -394,10 +388,16 @@ function getGoodsListArr(containerId)
     return arr;
 }
 
-
+/**
+ * изменяет порядок элементов входного массива по алфавиту
+ * @param {Array} arr - массив обоъектов со свойствами товаров страницы
+ * @returns {void}
+ */
 function orderAlphabet(arr)
 {
-    arr.sort((a, b) => a.name - b.name);    
+    arr.sort(function(a,b) {    
+        return a.name.localeCompare(b.name); 
+    });
 }
 
 /**
