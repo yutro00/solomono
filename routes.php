@@ -10,6 +10,7 @@ $routes = [
     '' => ['controller' => 'IndexController', 'action' => 'index'],
     '/' => ['controller' => 'IndexController', 'action' => 'index'],
     '/goods' => ['controller' => 'IndexController', 'action' => 'getGoodsByCategory'],
-    '/about' => ['controller' => 'IndexController', 'action' => 'about'],
-//    '/contact' => ['controller' => 'PageController', 'action' => 'contact'],
+    '/about' => ['controller' => 'MenuController', 'action' => 'getAbout'],
+    '/brands' => ['controller' => 'MenuController', 'action' => 'getBrands'],
+    '/contacts' => ['controller' => 'MenuController', 'action' => 'getContacts'],
 ];

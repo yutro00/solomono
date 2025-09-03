@@ -74,12 +74,29 @@ function readmeClick(event)
 
 function menuClick(event)
 {
+    let res = false;
     let elem = event.target;
+    let arr = elem.href.split('/');
+let query = arr.pop();
     
     if (elem.tagName === 'A') {
-
+        switch (arr.pop()) {
+            case '':
+                
+                break;
+            case '':
+                
+                break;
+            case 'contacts':
+                res = true;
+                break;
+                
+//            default:
+//                
+//                break;
+        }
     }
-    return false;
+    return res;
 }
 
 /**

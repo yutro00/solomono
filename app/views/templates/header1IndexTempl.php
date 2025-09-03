@@ -28,13 +28,11 @@ $res = '<div class="header1">'
     . '<ul id="nav-header" class="nav-header">
         <li id="readme" title="some comments to project">README!</li>
         <li><a href="/">Home</a></li>'
-        . "<li><a href=\"$noLink\">Brands</a></li>"
+        . "<li><a href=\"index.php/about\">About</a></li>"
+        . "<li><a href=\"index.php/brands\">Brands</a></li>"
         . "<li><a href=\"$noLink\">Payment and Shipping</a></li>"
         . "<li><a href=\"$noLink\">Warranty</a></li>"
-        . "<li><a href=\"contact_us.php\">Contacts</a></li>"
-//        . "\n"
-//        . '<span class="phone">Phone:   +38 097 829-79-89'
-//        . '</span>'
+        . "<li><a href=\"index.php/contacts\">Contacts</a></li>"
         . "\n"
         . '</ul>'
 //        . '<span><a id="login" class="login">Log in</a></span>'

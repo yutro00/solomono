@@ -73,7 +73,7 @@ if (array_key_exists($path, $routes)) {
 
     // Подключаем нужный контроллер
     $class = __DIR__ . "/app/controllers/" . $controllerName . ".php";
-    $res = require_once $class;
+    $isExist = require_once $class;
 
     // вызываем нужный метод
     try {

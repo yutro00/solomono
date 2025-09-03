@@ -85,11 +85,6 @@ class IndexController
     }
 
     
-    public function about()
-    {
-        echo "It is about response!!!";
-    }
-    
     
     public function getGoodsByCategory()
     {
@@ -131,6 +126,25 @@ class IndexController
         }
         echo $response;
     }
+    
+
+    
+    public function about()
+    {
+        echo 'It is about response!!!'
+            . '<br>'
+            . '<input type="button" onclick="history.back()">';
+    }
+
+
+    
+//    public function contacts()
+//    {
+//        echo 'It is \"contacts\" response!!!'
+//            . '<br>'
+//            . '<input type="button" onclick="history.back()">';
+//    }    
+
 }
 
 
