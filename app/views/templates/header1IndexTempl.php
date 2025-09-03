@@ -28,10 +28,10 @@ $res = '<div class="header1">'
     . '<ul id="nav-header" class="nav-header">
         <li id="readme" title="some comments to project">README!</li>
         <li><a href="/">Home</a></li>'
-        . "<li><a href=\"index.php/about\">About</a></li>"
         . "<li><a href=\"index.php/brands\">Brands</a></li>"
         . "<li><a href=\"$noLink\">Payment and Shipping</a></li>"
         . "<li><a href=\"$noLink\">Warranty</a></li>"
+        . "<li><a href=\"index.php/about\">About</a></li>"
         . "<li><a href=\"index.php/contacts\">Contacts</a></li>"
         . "\n"
         . '</ul>'

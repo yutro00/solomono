@@ -129,12 +129,12 @@ class IndexController
     
 
     
-    public function about()
-    {
-        echo 'It is about response!!!'
-            . '<br>'
-            . '<input type="button" onclick="history.back()">';
-    }
+//    public function about()
+//    {
+//        echo 'It is about response!!!'
+//            . '<br>'
+//            . '<input type="button" onclick="history.back()">';
+//    }
 
 
     

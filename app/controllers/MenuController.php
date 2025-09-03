@@ -35,9 +35,11 @@ class MenuController
         $response .= $this->getReturnButton();
         echo $response;
     }
- 
-    
-    
+
+    /**
+     * возвращает html строку с кнопкой Вернуться
+     * @return String
+     */
     private function getReturnButton()
     {
         return  '<br>'
